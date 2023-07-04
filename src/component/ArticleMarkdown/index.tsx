@@ -15,13 +15,16 @@ interface ArticleMarkdownProps {
     tocWidth: string;
     enableToc: boolean;
     enableComment: boolean;
+    cover: string;
+    documentUrl: string;
 }
 
-const ArticleMarkdown: React.FC<ArticleMarkdownProps> = ({lightColor, darkColor, markdownWidth, tocWidth, enableToc, enableComment}) => {
+const ArticleMarkdown: React.FC<ArticleMarkdownProps> = ({lightColor, darkColor, markdownWidth, tocWidth, enableToc, enableComment, cover, documentUrl}) => {
 
     const {
         currentMode,
         setCurrentMode,
+        setArticleWordCount
     } = useStateContext();
 
     useEffect(() => {
@@ -40,8 +43,8 @@ const ArticleMarkdown: React.FC<ArticleMarkdownProps> = ({lightColor, darkColor,
 
     useEffect(() => {
         // 读取 Markdown 文件内容
-        if ("https://huangrx.cn/document/Linux%20Centos7%20%E7%BC%96%E7%A8%8B%E7%8E%AF%E5%A2%83%E5%8F%8A%E9%A1%B9%E7%9B%AE%E4%B8%8A%E7%BA%BF%E9%83%A8%E7%BD%B2.md") {
-            fetch("https://huangrx.cn/document/Redis%20%E8%BF%87%E6%9C%9F%E7%AD%96%E7%95%A5%E5%8F%8A%E6%8C%81%E4%B9%85%E5%8C%96%E6%96%B9%E5%BC%8F.md")
+        if (documentUrl) {
+            fetch(documentUrl)
                 .then(response => response.text())
                 .then(text => {
                     setMarkdown(text)
@@ -49,16 +52,19 @@ const ArticleMarkdown: React.FC<ArticleMarkdownProps> = ({lightColor, darkColor,
                     // 预处理markdown内容，将代码块全部删除，以防止代码块中的#误使markdown-navbar生成标题。
                     const processedText = text.replace(/```[\s\S]*?```/g, '');
                     setTocMarkdown(processedText);
+
+                    // 使用正则表达式去除文章中的空格、标点符号等非字母字符,统计文章字数
+                    setArticleWordCount(text.replace(/[\W_]/g, '').length)
                 })
                 .catch(error => console.log(error));
         }
-    }, []);
+    }, [setArticleWordCount, documentUrl]);
 
     return (
         <div className={`relative flex w-full justify-center`}>
-            <div className={`text-dark bg-light dark:text-light dark:bg-dark ${markdownWidth}`}>
+            <div className={`text-dark !bg-light dark:text-light dark:bg-dark-mode ${markdownWidth}`}>
                 <ReactMarkdown
-                    className="markdown-body text-dark bg-light dark:text-light dark:bg-dark"
+                    className="markdown-body text-dark !bg-light dark:text-light dark:!bg-dark-mode pb-10"
                     remarkPlugins={[remarkGfm]}
                     rehypePlugins={[rehypeRaw]}
                     children={markdown}
@@ -105,7 +111,7 @@ const ArticleMarkdown: React.FC<ArticleMarkdownProps> = ({lightColor, darkColor,
                 {enableComment ? <ArticleComment/> : ''}
             </div>
 
-            {enableToc && tocMarkdown ? <ArticleToc tocMarkdown={tocMarkdown} width={tocWidth}/> : ''}
+            {enableToc && tocMarkdown ? <ArticleToc tocMarkdown={tocMarkdown} width={tocWidth} cover={cover}/> : ''}
         </div>
     );
 };

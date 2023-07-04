@@ -1,6 +1,7 @@
 import React, {ReactElement} from 'react';
 import Home from "../page/Home";
-import About from "../page/About";
+import BlogArticle from "../page/Article/BlogArticle";
+import BlogArticleCategory from "../page/ArticleCategory/BlogArticleCategory";
 
 interface Route {
     path: string;
@@ -22,8 +23,12 @@ const routers: Route[] = [
         element: loadingComponent(<Home/>)
     },
     {
-        path: "/about",
-        element: loadingComponent(<About/>)
+        path: '/blogs/article/:id',
+        element: loadingComponent(<BlogArticle/>)
+    },
+    {
+        path: '/blogs/category/:category',
+        element: loadingComponent(<BlogArticleCategory/>)
     }
 ]
 

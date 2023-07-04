@@ -4,7 +4,7 @@ import {useStateContext} from "../../../contexts/ContextProvider";
 
 const GlobalStyles: React.FC = () => {
     const whiteColor = "#F8F9FAFF";
-    const blackColor = "#222222FF";
+    const blackColor = "#121212FF";
     const grayColor = "#7E838DFF";
 
     const [currentColor, setCurrentColor] = useState<string>("");
@@ -169,6 +169,8 @@ const GlobalStyles: React.FC = () => {
                   #waline {
                     width: 100% !important;
                     margin: 0 auto !important;
+                    background-color: ${currentColorReverse};
+                    padding-bottom: 1.5rem;
                   }
 
                   .wl-panel {
@@ -181,7 +183,6 @@ const GlobalStyles: React.FC = () => {
                     border: none !important;
                     box-shadow: none !important;
                     flex-direction: column !important;
-                    margin-top: 1.5rem !important;
                   }
 
                   .wl-editor {
@@ -241,8 +242,16 @@ const GlobalStyles: React.FC = () => {
                     border-inline-start: none !important;
                   }
 
+                  .wl-btn.primary:disabled {
+                    background-color: ${currentColorReverse}
+                  }
+
                   .ant-btn-primary {
                     background-color: #1677ff;
+                  }
+
+                  .ant-pagination, .ant-pagination-item a, .ant-pagination-item-link, .ant-pagination-item-ellipsis {
+                    color: ${currentColor} !important;
                   }
                 `}
             />

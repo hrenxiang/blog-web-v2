@@ -55,6 +55,15 @@ const ArticleMarkdownStyles: React.FC<ArticleMarkdownStylesProps> = ({lightColor
                   .wl-delete svg path {
                     fill: ${currentMainColor}
                   }
+
+                  .wl-btn:disabled {
+                    background-color: ${lightColor};
+                  }
+                  
+                  .ant-pagination-item-active {
+                    background: transparent !important;
+                    border-color: ${currentMode === "Dark" ? lightColor : darkColor} !important;
+                  }
                 `}
             />
         </>

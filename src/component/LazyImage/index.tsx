@@ -3,9 +3,10 @@ import {LazyLoadImage} from "react-lazy-load-image-component";
 
 interface LazyImageProps {
     url: string;
+    borderRadius?: string;
 }
 
-const LazyImage: React.FC<LazyImageProps> = ({url}) => {
+const LazyImage: React.FC<LazyImageProps> = ({url, borderRadius}) => {
 
     return (
         <div className="h-full w-full">
@@ -14,6 +15,7 @@ const LazyImage: React.FC<LazyImageProps> = ({url}) => {
                 src={url}
                 style={{
                     objectFit: "cover",
+                    borderRadius: borderRadius ? borderRadius : "none"
                 }}
                 alt="Image"
                 effect="blur"

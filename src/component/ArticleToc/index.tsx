@@ -5,9 +5,10 @@ import LazyImage from "../LazyImage";
 interface ArticleTocProps {
     tocMarkdown: string;
     width: string;
+    cover: string;
 }
 
-const ArticleToc: React.FC<ArticleTocProps> = ({tocMarkdown, width}) => {
+const ArticleToc: React.FC<ArticleTocProps> = ({tocMarkdown, width, cover}) => {
     return (
         <div className={`m-0 ml-auto relative ${width}`}>
             <div className="sticky top-8 bg-transparent flex flex-col items-start">
@@ -18,8 +19,8 @@ const ArticleToc: React.FC<ArticleTocProps> = ({tocMarkdown, width}) => {
                     ordered={false}
                 />
 
-                <div className="blog-cover w-full bg-transparent top-[calc(7rem + 60vh)] mt-2rem">
-                    <LazyImage url={"https://images.huangrx.cn/uploads/2023/06/05/pexels-miguel-%C3%A1-padri%C3%B1%C3%A1n-255377.jpg"} />
+                <div className="blog-cover w-full bg-transparent top-[calc(7rem + 60vh)] mt-2rem ">
+                    <LazyImage url={cover} borderRadius="10px" />
                 </div>
             </div>
         </div>

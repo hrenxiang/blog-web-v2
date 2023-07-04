@@ -11,7 +11,7 @@ const VideoArticleItem: React.FC = () => {
                 </div>
             </a>
             <div className="flex flex-col justify-between  p-6">
-                <ArticleChip textColor="text-red-dark" backgroundColor="bg-red-25" darkBackgroundColor="dark:bg-red" label="Development"/>
+                <ArticleChip textColor="text-red-dark" darkTextColor="text-red-dark" backgroundColor="bg-red-25" darkBackgroundColor="dark:bg-red" label="Development"/>
                 <a href="/">
                     <h2 className="mt-2 cursor-pointer font-os text-3xl font-bold decoration-red-dark  decoration-solid decoration-2 underline-offset-2 hover:underline  dark:text-light dark:decoration-red xl:text-2xl  lg:text-xl  ">adfafdaf</h2>
                 </a>

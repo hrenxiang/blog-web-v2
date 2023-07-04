@@ -24,10 +24,10 @@ const App: React.FC = () => {
     return (
         <>
             <GlobalStyles/>
-            <div className={currentMode === "Dark" ? 'dark' : ''}>
+            <div className={`${currentMode === "Dark" ? 'dark' : ''}`}>
                 <BrowserRouter>
                     <NavBar/>
-                    <div className="bg-light dark:bg-dark p-3 2xl:p-20 lg:p-15  md:p-10">
+                    <div className="min-h-screen bg-light dark:bg-dark-mode text-dark dark:text-light">
                         <Routes>
                             {routers.map((route, index) => (
                                 <Route key={index} path={route.path} element={route.element} />

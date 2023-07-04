@@ -2,6 +2,7 @@ import React from 'react';
 
 interface ArticleChipProps {
     textColor: string;
+    darkTextColor: string;
     backgroundColor: string;
     darkBackgroundColor: string;
     label: string;
@@ -9,6 +10,7 @@ interface ArticleChipProps {
 
 const ArticleChip: React.FC<ArticleChipProps> = ({
                                                      textColor,
+                                                     darkTextColor,
                                                      backgroundColor,
                                                      darkBackgroundColor,
                                                      label,
@@ -16,7 +18,7 @@ const ArticleChip: React.FC<ArticleChipProps> = ({
     return (
         <div className="flex w-full items-center justify-between">
             <span
-                className={`w-max rounded-sm ${backgroundColor} py-1 px-2 text-sm font-semibold uppercase ${textColor} ${darkBackgroundColor} dark:text-dark`}>
+                className={`w-max rounded-sm ${backgroundColor} py-1 px-2 text-sm font-semibold uppercase ${textColor} ${darkTextColor} ${darkBackgroundColor} dark:text-dark flex-none`}>
                 {label}
             </span>
         </div>

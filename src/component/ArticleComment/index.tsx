@@ -16,7 +16,8 @@ const ArticleComment: React.FC = () => {
             el: '#waline',
             serverURL: 'https://waline.huangrx.cn',
             locale: locale,
-            login: 'force'
+            login: 'force',
+            pageview: true
         });
     }, [])
 

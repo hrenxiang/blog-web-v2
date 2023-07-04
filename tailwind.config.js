@@ -31,6 +31,7 @@ const allColor = {
     'purple': 'rgba(195, 165, 245)',
     'purple-25': 'rgba(195, 165, 245, .25)',
     'purple-50': 'rgba(195, 165, 245, .50)',
+    'purple-75': 'rgba(195, 165, 245, .75)',
     'purple-dark': 'rgba(105, 45, 202)',
     'purple-dark-50': 'rgba(105, 45, 202, .50)',
     'purple-dark-75': 'rgba(105, 45, 202, .75)',
@@ -44,6 +45,15 @@ const allColor = {
     'red-dark-25': 'rgba(220, 39, 55, .25)',
     'red-dark-50': 'rgba(220, 39, 55, .50)',
     'red-dark-75': 'rgba(220, 39, 55, .75)',
+}
+
+const allDropShadow = {
+    "purple": "0 8px 0 #C3A5F5FF",
+    "purple-dark": "0 8px 0 #692DCAFF",
+    "purple-sm": "0 4px 0 #C3A5F5FF",
+    "purple-dark-sm": "0 4px 0 #692DCAFF",
+    "purple-xsm": "0 2px 0 #C3A5F5FF",
+    "purple-dark-xsm": "0 2px 0 #692DCAFF",
 }
 
 const allSize = {
@@ -150,6 +160,7 @@ module.exports = {
             textColor: allColor,
             backgroundColor: allColor,
             borderColor: allColor,
+            dropShadow: allDropShadow,
             fill: allColor,
             textDecorationColor: allColor,
         },
