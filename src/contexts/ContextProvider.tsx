@@ -1,5 +1,4 @@
 import React, {createContext, useContext, useState} from 'react';
-import {DocumentResponseRecord} from "../api/path/document";
 
 interface StateContextProps {
     currentColor: string;
@@ -22,10 +21,12 @@ interface StateContextProps {
     setLightColor: (color: string) => void;
     darkColor: string;
     setDarkColor: (color: string) => void;
-    articleWordCount: number;
-    setArticleWordCount: (count: number) => void;
-    currentBlogArticleProps: DocumentResponseRecord;
-    setCurrentBlogArticleProps: (record: DocumentResponseRecord) => void;
+    readingTime: number;
+    setReadingTime: (count: number) => void;
+    navPersonBg: string;
+    setNavPersonBg: (src: string) => void;
+    navBrushBg: string;
+    setNavBrushBg: (src: string) => void;
 }
 
 const StateContext = createContext<StateContextProps | undefined>(undefined);
@@ -37,36 +38,22 @@ const initialState = {
     notification: false,
 };
 
-const blogArticleProps = {
-        author: '',
-        author_avatar: '',
-        category: '',
-        cover: '',
-        create_time: '',
-        description: '',
-        document_url: '',
-        id: 0,
-        online: 0,
-        subcategory: '',
-        title: '',
-        update_time: ''
-}
-
 interface ContextProviderProps {
     children: React.ReactNode;
 }
 
 export const ContextProvider: React.FC<ContextProviderProps> = ({children}) => {
     const [screenSize, setScreenSize] = useState<any>(undefined);
-    const [currentColor, setCurrentColor] = useState('#03C9D7');
+    const [currentColor, setCurrentColor] = useState('#C9B6E4FF');
     const [currentMode, setCurrentMode] = useState('Light');
     const [themeSettings, setThemeSettings] = useState(false);
     const [activeMenu, setActiveMenu] = useState(true);
     const [isClicked, setIsClicked] = useState(initialState);
     const [lightColor, setLightColor] = useState('#fff');
     const [darkColor, setDarkColor] = useState('#000');
-    const [articleWordCount, setArticleWordCount] = useState(0);
-    const [currentBlogArticleProps, setCurrentBlogArticleProps] = useState<DocumentResponseRecord>(blogArticleProps);
+    const [readingTime, setReadingTime] = useState(0);
+    const [navPersonBg, setNavPersonBg] = useState('url("https://huangrx.cn/img/nav-left-pink.png")');
+    const [navBrushBg, setNavBrushBg] = useState('url("https://huangrx.cn/img/nav-brush-pink.png")');
 
     const setMode = (mode: string) => {
         setCurrentMode(mode);
@@ -103,10 +90,12 @@ export const ContextProvider: React.FC<ContextProviderProps> = ({children}) => {
                 setLightColor,
                 darkColor,
                 setDarkColor,
-                articleWordCount,
-                setArticleWordCount,
-                currentBlogArticleProps,
-                setCurrentBlogArticleProps
+                readingTime,
+                setReadingTime,
+                navPersonBg,
+                setNavPersonBg,
+                navBrushBg,
+                setNavBrushBg
             }}
         >
             {children}

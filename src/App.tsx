@@ -4,30 +4,41 @@ import {useStateContext} from "./contexts/ContextProvider";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import routers from "./router/Router";
 import NavBar from "./component/NavBar";
-import GlobalStyles from "./component/SingleComponentStyles/GlobalStyles";
 import Footer from "./component/Footer";
+import {ArticleMarkdownStyles, GlobalStyles} from "./component/SingleComponentStyles";
 
 const App: React.FC = () => {
 
     const {
         currentMode,
         setCurrentMode,
+        setNavPersonBg,
+        setNavBrushBg
     } = useStateContext();
 
     useEffect(() => {
         const currentThemeMode = localStorage.getItem('themeMode');
+        const currentNavBg = localStorage.getItem('NAV_BG');
+        const currentNavBrushBg = localStorage.getItem('NAV_BRUSH_BG');
         if (currentThemeMode) {
             setCurrentMode(currentThemeMode);
         }
-    }, [currentMode, setCurrentMode]);
+        if (currentNavBg) {
+            setNavPersonBg(currentNavBg);
+        }
+        if (currentNavBrushBg) {
+            setNavBrushBg(currentNavBrushBg);
+        }
+    }, [currentMode, setCurrentMode,setNavPersonBg, setNavBrushBg]);
 
     return (
         <>
             <GlobalStyles/>
-            <div className={`${currentMode === "Dark" ? 'dark' : ''}`}>
+            <ArticleMarkdownStyles/>
+            <div className={`${currentMode === "Dark" ? 'dark' : ''} `}>
                 <BrowserRouter>
                     <NavBar/>
-                    <div className="min-h-screen bg-light dark:bg-dark-mode text-dark dark:text-light">
+                    <div className="bg-light-mode-one dark:bg-dark-mode text-dark dark:text-light min-h-screen font-sans mb-[-1px]">
                         <Routes>
                             {routers.map((route, index) => (
                                 <Route key={index} path={route.path} element={route.element} />

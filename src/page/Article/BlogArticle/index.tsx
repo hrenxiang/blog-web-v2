@@ -1,49 +1,76 @@
 import React, {useEffect, useState} from 'react';
-import {ArticleMarkdownStyles} from "../../../component/SingleComponentStyles";
 import ArticleMarkdown from "../../../component/ArticleMarkdown";
 import {IoEyeOutline} from "react-icons/io5";
 import ArticleChip from "../../../component/ArticleChip";
 import {useStateContext} from "../../../contexts/ContextProvider";
 import {SubcategoryVO} from "../../../api/path/subcategory";
 import {api} from "../../../api";
-import {Link} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
+import {DocumentResponseRecord} from "../../../api/path/document";
 
 const BlogArticle = () => {
 
+    const {id} = useParams();
+
+    const blogArticleProps = {
+        author: '',
+        author_avatar: '',
+        category: '',
+        cover: '',
+        create_time: '',
+        description: '',
+        document_url: '',
+        id: 0,
+        online: 0,
+        subcategory: '',
+        title: '',
+        update_time: '',
+        views: 0
+    }
+
+    const [blogRecord, setBlogRecord] = useState<DocumentResponseRecord>(blogArticleProps);
+
+    useEffect(() => {
+        if (id) {
+            api.acquireDocumentById(parseInt(id)).then((res) => {
+                setBlogRecord(res[0].data);
+            })
+
+            // 滚动到顶部
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    }, [id]);
+
+
     const {
-        articleWordCount,
-        currentBlogArticleProps,
+        readingTime,
     } = useStateContext();
-
-    const readingSpeed = 250;
-
-    const [readingTime, setReadingTime] = useState(0);
 
     const [subcategoryId, setSubcategoryId] = useState<number>(0);
 
     useEffect(() => {
-
-        setReadingTime(Math.ceil(articleWordCount / readingSpeed));
-
         api.acquireAllSubcategory().then((res) => {
-            const records = res[0].data as SubcategoryVO[];
 
-            records.map((record) => (
-                record.subcategory_name === currentBlogArticleProps.subcategory ? setSubcategoryId(record.subcategory_id) : ''
-            ))
+            if (res[0]?.code === 0 || res[0]?.code === 200) {
+                const records = res[0].data as SubcategoryVO[];
 
-            // 滚动到顶部
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+                records.map((record) => (
+                    record.subcategory_name === blogRecord.subcategory ? setSubcategoryId(record.subcategory_id) : ''
+                ))
+
+                // 滚动到顶部
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
         });
-    }, [articleWordCount, currentBlogArticleProps.subcategory]);
-
+    }, [blogRecord])
 
     return (
         <div
-            className="py-16 px-16 md:px-12 sm:px-4 flex flex-col items-center justify-center text-1rem bg-light dark:bg-dark-mode">
-            <span>上传日期 {currentBlogArticleProps.create_time}</span>
-            <h1 className="my-12 text-center text-8xl font-extrabold uppercase leading-tight drop-shadow-purple dark:drop-shadow-purple-dark sxl:text-7xl sxl:leading-snug md:my-8 md:text-6xl md:leading-snug sm:text-5xl  sm:leading-snug sm:drop-shadow-purple-sm dark:sm:drop-shadow-purple-dark-sm xsm:text-3xl  xsm:leading-tight xsm:drop-shadow-purple-xsm dark:xsm:drop-shadow-purple-dark-xsm xs:text-3xl ">
-                {currentBlogArticleProps.title}
+            className="py-8r md:py-6r px-16 md:px-12 sm:px-4 flex flex-col items-center justify-center text-1rem bg-light dark:bg-dark-mode">
+            <span>上传日期 {blogRecord.create_time}</span>
+            <h1 className="my-2r md:my-1r text-center text-2r md:text-1r font-extrabold uppercase">
+                {blogRecord.title}
             </h1>
             <div className="flex items-center justify-center sm:flex-wrap gap-10 md:gap-5">
                 <div>
@@ -51,33 +78,25 @@ const BlogArticle = () => {
                 </div>
                 <div className="flex items-center justify-center gap-2">
                     <IoEyeOutline/>
-                    <span><span className="waline-pageview-count" data-path={`/blogs/article/${currentBlogArticleProps.id}`}/>&nbsp;views</span>
+                    <span>{blogRecord.views + 1}&nbsp;views</span>
                 </div>
 
             </div>
-            <div className="mt-6 mb-12 flex items-center gap-2">
-                <span className="flex-none">分类</span>
-                <ArticleChip textColor={"text-purple-75"} darkTextColor={"dark:text-purple"}
-                             backgroundColor={"bg-light"} darkBackgroundColor={"dark:bg-dark-mode"}
-                             label={currentBlogArticleProps.category}/>
+            <div className="mt-6 mb-12 flex items-center gap-8 md:gap-2">
+                <ArticleChip label={blogRecord.category}/>
                 <Link to={`/blogs/category/${subcategoryId}`}>
-                    <ArticleChip textColor={"text-purple-75"} darkTextColor={"dark:text-purple"}
-                                 backgroundColor={"bg-light"} darkBackgroundColor={"dark:bg-dark-mode"}
-                                 label={currentBlogArticleProps.subcategory}/>
+                    <ArticleChip label={blogRecord.subcategory}/>
                 </Link>
             </div>
 
 
             {/*阅读量: <span className="waline-pageview-count" data-path="/" />*/}
-            <ArticleMarkdownStyles lightColor={"#C3A5F5FF"} darkColor={"#692DCAFF"}/>
             <ArticleMarkdown
-                lightColor={"hover:bg-[#C3A5F5FF]"}
-                darkColor={"dark:hover:bg-[#692DCAFF]"}
                 markdownWidth={"w-7/10 2xl:w-3/5 lg:w-full"}
                 tocWidth={"w-1/5 2xl:w-3/10 lg:hidden"}
                 enableToc={true} enableComment={true}
-                documentUrl={currentBlogArticleProps.document_url}
-                cover={currentBlogArticleProps.cover}
+                documentUrl={blogRecord.document_url}
+                cover={blogRecord.cover}
             />
         </div>
     );

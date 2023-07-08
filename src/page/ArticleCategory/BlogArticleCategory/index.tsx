@@ -5,34 +5,30 @@ import {SubcategoryVO} from "../../../api/path/subcategory";
 import {Link, useLocation} from "react-router-dom";
 import {BlogArticleItemV2} from "../../../component/ArticleItem";
 import {Pagination} from "antd";
-import {ArticleMarkdownStyles} from "../../../component/SingleComponentStyles";
 
 const BlogArticleCategory = () => {
 
-    const location = useLocation();
-
-    const match = location.pathname?.match(/\/blogs\/category\/(\d+)/);
-
-    const id = match && match[1];
-
-    const [currentCategory, setCurrentCategory] = useState<number>(id ? parseInt(id) : 0);
-    const [currentCategoryName, setCurrentCategoryName] = useState<string>('All');
-
     const [allSubcategory, setAllSubcategory] = useState<SubcategoryVO[]>([]);
 
-    const [allDocument, setAllDocument] = useState<DocumentResponsePageData>();
+    useEffect(() => {
+        api.acquireAllSubcategory().then((res) => {
+            if (res[0]?.code === 0 || res[0]?.code === 200) {
+                setAllSubcategory(res[0]?.data)
+            }
+        });
+    }, []);
 
+
+    const [allDocument, setAllDocument] = useState<DocumentResponsePageData>();
     const [state, setState] = useState({
         pageNum: 1,
         pageSize: 9
     })
-
-    useEffect(() => {
-        api.acquireAllSubcategory().then((res) => {
-            setAllSubcategory(res[0].data)
-        });
-    }, []);
-
+    const location = useLocation();
+    const match = location.pathname?.match(/\/blogs\/category\/(\d+)/);
+    const id = match && match[1];
+    const [currentCategory, setCurrentCategory] = useState<number>(id ? parseInt(id) : 0);
+    const [currentCategoryName, setCurrentCategoryName] = useState<string>('All');
 
     useEffect(() => {
         const documentPageVO: DocumentRequestVO = {
@@ -42,7 +38,9 @@ const BlogArticleCategory = () => {
         }
 
         api.acquireDocument(documentPageVO).then((res) => {
-            setAllDocument(res[0].data)
+            if (res[0]?.code === 0 || res[0]?.code === 200) {
+                setAllDocument(res[0]?.data)
+            }
         });
     }, [currentCategory, state.pageNum, state.pageSize]);
 
@@ -51,7 +49,7 @@ const BlogArticleCategory = () => {
         setCurrentCategoryName(category_name);
     }
 
-    function handlePageChange(currentPage:number, pageSize:number) {
+    function handlePageChange(currentPage: number, pageSize: number) {
         // 将页码发送给后端
         setState(() => ({
             pageNum: currentPage,
@@ -59,59 +57,70 @@ const BlogArticleCategory = () => {
         }))
 
         // 滚动到顶部
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        window.scrollTo({top: 0, behavior: 'smooth'});
     }
 
     return (
-        <div
-            className="relative mx-32 flex flex-col items-center justify-start lg:mx-14 md:mx-12 xsm:mx-4 text-1rem bg-light dark:bg-dark-mode py-16">
+        <>
+            <div
+                className="relative flex flex-col items-center justify-start pt-10r pb-0 md:pt-6r px-16 lg:px-14 md:px-12 sm:px-4">
 
-            <h1 className="flex mb-8 block w-full font-ot text-4xl font-semibold capitalize leading-tight tracking-wide text-purple-dark dark:text-purple md:text-center xs:text-3xl ">
-                #&nbsp;{currentCategoryName}
-            </h1>
-            <header className="flex w-full flex-row items-center justify-start overflow-x-auto flex-wrap">
-                <Link className={`p-2 px-3 mr-6 lg:mr-4 md:mb-2 md:mr-2 border-solid border-purple-dark dark:border-purple border-1px rounded font-medium capitalize last:mr-0 hover:bg-transparent
-                            bg-purple-50 dark:bg-purple hover:bg-transparent hover:dark:bg-transparent hover:dark:text-light text-purple-dark dark:text-dark hover:cursor-pointer ${currentCategory === 0 ? "!bg-purple-dark !text-light" : ""}`}
-                      onClick={() => {
-                          switchCategory(0, 'All')
-                      }}
-                      to="/blogs/category/0" key="0">
-                    <h2>All</h2>
-                </Link>
-                {
-                    allSubcategory.map((subcategory) => (
-                        <Link className={`p-2 px-3 mr-6 lg:mr-4 md:mb-2 md:mr-2 border-solid border-purple-dark dark:border-purple border-1px rounded font-medium capitalize last:mr-0 hover:bg-transparent
-                            bg-purple-50 dark:bg-purple hover:bg-transparent hover:dark:bg-transparent hover:dark:text-light text-purple-dark dark:text-dark hover:cursor-pointer ${currentCategory === subcategory.subcategory_id ? "!bg-purple-dark !text-light" : ""}`}
-                              onClick={() => {
-                                  switchCategory(subcategory.subcategory_id, subcategory.subcategory_name)
-                              }}
-                              to={`/blogs/category/${subcategory.subcategory_id}`} key={subcategory.subcategory_id}>
-                            <h2>{subcategory.subcategory_name}</h2>
-                        </Link>
-                    ))
-                }
-            </header>
-            <article className="mt-8 grid w-full grid-cols-3 gap-16 xl:gap-12 sxl:gap-8  lg:grid-cols-2  md:grid-cols-1">
-                {
-                    allDocument?.records?.map((record) => (
-                        <BlogArticleItemV2 record={record} key={record.id}/>
-                    ))
-                }
-            </article>
-            <div className="w-full my-12 md:my-8">
-                <ArticleMarkdownStyles lightColor={"#C3A5F5FF"} darkColor={"#692DCAFF"}/>
-                <Pagination
-                    onChange={handlePageChange}
-                    total={allDocument?.total}
-                    pageSize={9}
-                    showSizeChanger={false}
-                    showQuickJumper={false}
-                    showLessItems
-                    showTotal={(total) => `共 ${total} 条`}
-                    className="text-dark dark:text-light flex items-center justify-center w-full"
-                />
+                <h1 className="relative flex mb-8 block w-full font-lilita text-2r 2xl:text-1.4r md:text-1r font-semibold capitalize leading-tight tracking-wide text-dark dark:text-light">
+                    <span className="ml-6">{currentCategoryName}</span>
+                    <span
+                        className={`absolute left-0 top-0 w-8p md:w-4p h-full rounded-md bg-dark dark:bg-light h-2p transform ease-in duration-300`}>&nbsp;</span>
+                </h1>
+                <header
+                    className="flex w-full flex-row items-center justify-start overflow-x-auto py-06r category-header">
+                    <Link
+                        className={`blog-category-header p-2 px-3 mr-6 lg:mr-4 md:mb-2 md:mr-2 border-solid border-dark dark:border-light border-2p rounded font-medium last:mr-0
+                                bg-transparent dark:text-light hover:cursor-pointer ${currentCategory === 0 ? "!bg-dark !text-light dark:!bg-light dark:!text-dark" : ""}`}
+                        onClick={() => {
+                            switchCategory(0, 'All');
+                        }}
+                        to="/blogs/category/all"
+                        key="0"
+                    >
+                        <h2 className="whitespace-nowrap">All</h2>
+                    </Link>
+                    {
+                        allSubcategory?.map((subcategory) => (
+                            <Link
+                                className={`blog-category-header p-2 px-3 mr-6 lg:mr-4 md:mb-2 md:mr-2 border-solid border-dark dark:border-light border-2p rounded font-medium last:mr-0
+                                bg-transparent text-dark dark:text-light hover:cursor-pointer ${currentCategory === subcategory.subcategory_id ? "!bg-dark !text-light dark:!bg-light dark:!text-dark" : ""}`}
+                                onClick={() => {
+                                    switchCategory(subcategory.subcategory_id, subcategory.subcategory_name);
+                                }}
+                                to={`/blogs/category/${subcategory.subcategory_name}`}
+                                key={subcategory.subcategory_id}
+                            >
+                                <h2 className="whitespace-nowrap">{subcategory.subcategory_name}</h2>
+                            </Link>
+                        ))
+                    }
+                </header>
+                <article
+                    className="mt-8 grid w-full grid-cols-3 gap-16 xl:gap-12 sxl:gap-8  lg:grid-cols-2  md:grid-cols-1">
+                    {
+                        allDocument?.records?.map((record) => (
+                            <BlogArticleItemV2 record={record} key={record.id}/>
+                        ))
+                    }
+                </article>
+                <div className="w-full my-12 md:my-8">
+                    <Pagination
+                        onChange={handlePageChange}
+                        total={allDocument?.total}
+                        pageSize={9}
+                        showSizeChanger={false}
+                        showQuickJumper={false}
+                        showLessItems
+                        showTotal={(total) => `共 ${total} 条`}
+                        className="text-dark dark:text-light flex items-center justify-center w-full"
+                    />
+                </div>
             </div>
-        </div>
+        </>
     );
 };
 

@@ -9,8 +9,6 @@ import {useStateContext} from "../../contexts/ContextProvider";
 import ArticleComment from "../ArticleComment";
 
 interface ArticleMarkdownProps {
-    lightColor: string;
-    darkColor: string;
     markdownWidth: string;
     tocWidth: string;
     enableToc: boolean;
@@ -19,12 +17,20 @@ interface ArticleMarkdownProps {
     documentUrl: string;
 }
 
-const ArticleMarkdown: React.FC<ArticleMarkdownProps> = ({lightColor, darkColor, markdownWidth, tocWidth, enableToc, enableComment, cover, documentUrl}) => {
+const ArticleMarkdown: React.FC<ArticleMarkdownProps> = ({
+                                                             markdownWidth,
+                                                             tocWidth,
+                                                             enableToc,
+                                                             enableComment,
+                                                             cover,
+                                                             documentUrl
+                                                         }) => {
 
     const {
         currentMode,
         setCurrentMode,
-        setArticleWordCount
+        setReadingTime,
+        currentColor
     } = useStateContext();
 
     useEffect(() => {
@@ -41,6 +47,8 @@ const ArticleMarkdown: React.FC<ArticleMarkdownProps> = ({lightColor, darkColor,
     // 预处理后的文章目录内容
     const [tocMarkdown, setTocMarkdown] = useState('');
 
+    const [articleWordCount, setArticleWordCount] = useState<number>(0);
+
     useEffect(() => {
         // 读取 Markdown 文件内容
         if (documentUrl) {
@@ -53,18 +61,23 @@ const ArticleMarkdown: React.FC<ArticleMarkdownProps> = ({lightColor, darkColor,
                     const processedText = text.replace(/```[\s\S]*?```/g, '');
                     setTocMarkdown(processedText);
 
-                    // 使用正则表达式去除文章中的空格、标点符号等非字母字符,统计文章字数
-                    setArticleWordCount(text.replace(/[\W_]/g, '').length)
+                    setArticleWordCount(text.replace(/[\W_]/g, '').length);
                 })
                 .catch(error => console.log(error));
         }
-    }, [setArticleWordCount, documentUrl]);
+    }, [documentUrl]);
+
+    useEffect(() => {
+        // 使用正则表达式去除文章中的空格、标点符号等非字母字符,统计文章字数
+        setReadingTime(Math.ceil(articleWordCount / 250))
+    }, [articleWordCount, setReadingTime]);
+
 
     return (
         <div className={`relative flex w-full justify-center`}>
-            <div className={`text-dark !bg-light dark:text-light dark:bg-dark-mode ${markdownWidth}`}>
+            <div className={`text-dark dark:text-light bg-light dark:bg-dark-mode ${markdownWidth}`}>
                 <ReactMarkdown
-                    className="markdown-body text-dark !bg-light dark:text-light dark:!bg-dark-mode pb-10"
+                    className="markdown-body text-dark dark:text-light !bg-light dark:!bg-dark-mode pb-10 text-1r md:!text-06r !leading-1.6r md:!leading-1.4r"
                     remarkPlugins={[remarkGfm]}
                     rehypePlugins={[rehypeRaw]}
                     children={markdown}
@@ -74,7 +87,9 @@ const ArticleMarkdown: React.FC<ArticleMarkdownProps> = ({lightColor, darkColor,
                             return inline ?
                                 (
                                     <span
-                                        className="text-red dark:text-red-dark bg-red-15 px-6px py-2px rounded-6px mx-2px">
+                                        className="text-dark dark:text-light p-2p rounded-6p mx-2p"
+                                        style={{backgroundColor: currentColor}}
+                                    >
                                                             <code
                                                                 className={`${className} !bg-transparent !rounded-none `} {...props}>
                                                                 {children}
@@ -85,21 +100,15 @@ const ArticleMarkdown: React.FC<ArticleMarkdownProps> = ({lightColor, darkColor,
                                 (
                                     match ?
                                         (
-                                            <ArticleSyntaxHighlighter lightColor={lightColor}
-                                                                      darkColor={darkColor}
-                                                                      children={children}
+                                            <ArticleSyntaxHighlighter children={children}
                                                                       language={match[1]}
-                                                                      currentMode={currentMode}
                                                                       {...props}
                                             />
                                         )
                                         :
                                         (
-                                            <ArticleSyntaxHighlighter lightColor={lightColor}
-                                                                      darkColor={darkColor}
-                                                                      children={children}
+                                            <ArticleSyntaxHighlighter children={children}
                                                                       language="bash"
-                                                                      currentMode={currentMode}
                                                                       {...props}
                                             />
                                         )

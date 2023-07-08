@@ -9,7 +9,7 @@ interface LazyImageProps {
 const LazyImage: React.FC<LazyImageProps> = ({url, borderRadius}) => {
 
     return (
-        <div className="h-full w-full">
+        <div className="w-full">
             <LazyLoadImage
                 className="h-full w-full"
                 src={url}

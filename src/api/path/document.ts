@@ -1,4 +1,4 @@
-import {Post} from "../server";
+import {Get, Post} from "../server";
 
 export interface DocumentResponsePageData {
     countId: null;
@@ -26,6 +26,7 @@ export interface DocumentResponseRecord {
     subcategory: string;
     title: string;
     update_time: string;
+    views: number;
 }
 
 export interface DocumentRequestVO {
@@ -43,6 +44,21 @@ export const acquireDocument = (param: DocumentRequestVO) => {
         });
 }
 
+export const acquireDocumentById = (id: number) => {
+    return Get(`/document/acquire/${id}`);
+}
+
+export const acquireLatelyDocument = (num: number) => {
+    return Get(`/document/acquire/lately/${num}`);
+}
+
+export const addView = (id: number) => {
+    return Post(`/document/add/view/${id}`,{});
+}
+
 export const documentApi = {
-    acquireDocument
+    acquireDocument,
+    acquireDocumentById,
+    acquireLatelyDocument,
+    addView
 }

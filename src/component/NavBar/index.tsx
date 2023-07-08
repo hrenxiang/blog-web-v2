@@ -1,32 +1,43 @@
 import React, {useEffect, useState} from 'react';
 import {useStateContext} from "../../contexts/ContextProvider";
-import {BiMoon, BiSun} from "react-icons/bi";
 import {CgMenuMotion} from "react-icons/cg";
 import {IoMdClose} from "react-icons/io";
-import SiteOverlay from "../SiteOverlay";
-import {Link, useLocation} from "react-router-dom";
+import {Link} from "react-router-dom";
+import LazyImage from "../LazyImage";
+import {BsTencentQq} from "react-icons/bs";
+import {RiGithubFill, RiWechatFill} from "react-icons/ri";
 
 const NavBar: React.FC = () => {
 
     const {
         currentMode,
-        setCurrentMode,
+        setMode,
+        currentColor,
+        setColor,
+        navPersonBg,
+        setNavPersonBg,
+        setNavBrushBg
     } = useStateContext();
-
-    const location = useLocation();
 
     const [menuFlag, setMenuFlag] = useState<boolean>(false);
 
     useEffect(() => {
         const currentThemeMode = localStorage.getItem('themeMode');
-        if (currentThemeMode) {
-            setCurrentMode(currentThemeMode);
+        const currentColorMode = localStorage.getItem('colorMode');
+        if (currentThemeMode && currentColorMode) {
+            setMode(currentThemeMode);
+            setColor(currentColorMode);
         }
-    }, [currentMode, setCurrentMode]);
+    }, [currentMode, setMode, currentColor, setColor, setNavBrushBg]);
 
-    const switchThemeMode = (themeMode: string) => {
-        setCurrentMode(themeMode);
-        localStorage.setItem("themeMode", themeMode)
+    const switchThemeMode = (themeMode: string, currentColor: string, navPersonBgUrl: string, navBrushBgUrl: string) => {
+        setMode(themeMode);
+        setColor(currentColor);
+        setNavPersonBg(navPersonBgUrl);
+        localStorage.setItem("NAV_BG", navPersonBgUrl)
+        setNavBrushBg(navBrushBgUrl);
+        localStorage.setItem("NAV_BRUSH_BG", navBrushBgUrl)
+        setMenuFlag(!menuFlag);
     }
 
     const switchMenuButton = () => {
@@ -34,109 +45,174 @@ const NavBar: React.FC = () => {
     }
 
     return (
-        <header className="relative flex w-full flex-col bg-light  text-dark   dark:bg-dark-mode dark:text-light ">
-            <nav className="flex w-full items-center justify-between py-4 px-16 lg:px-14 md:px-12 sm:px-4 ">
-                <a className="w-12rem sm:w-10rem " href="/">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 562 160"
-                         className="h-auto w-full fill-dark dark:fill-light">
-                        <rect width="160" height="160" rx="15" ry="15"/>
-                        <text x="82" y="90" fontSize="120" textAnchor="middle" strokeWidth="1"
-                              dominantBaseline="middle" className=" fill-dark-mode dark:fill-light stroke-light dark:stroke-dark">H
-                        </text>
-                        <text x="80" y="89" fontSize="120" fill="#fff" textAnchor="middle"
-                              dominantBaseline="middle" className=" fill-light dark:fill-dark-mode">H
-                        </text>
-                        <text x="180" y="75" fontSize="46"
-                              className="fill-dark dark:fill-light font-medium">PracticalDreamer
-                        </text>
-                        <text x="180" y="130" fontSize="38" fill="#646464">By Huangrx</text>
-                    </svg>
-                </a>
-
-                <div className={`ease duration-400 z-50 flex items-center text-1rem transition-all lg:fixed lg:left-[50%]
-                                lg:w-[50%] lg:translate-x-[-50%]
-                                lg:flex-col  lg:justify-center lg:rounded-lg lg:bg-dark lg:py-6 lg:text-light
-                                lg:shadow-xl dark:lg:border-dark
-                                dark:lg:bg-light dark:lg:text-dark
-                                dark:lg:shadow-xl
-                                md:w-[75%]
-                                sm:w-[90%] ${menuFlag ? "lg:top-[20%]" : "lg:-top-[500%]"}`}>
-                    <div className="group relative undefined">
-                        {
-                            menuFlag ? <Link to="/" onClick={switchMenuButton}>Home</Link> : <Link to="/">Home</Link>
-                        }
-                        <span className={`absolute left-0  top-[100%] rounded-md bg-purple-dark dark:bg-purple h-[2px] ${location.pathname === "/" ?"w-full":"ease w-0 rounded-md transition-all duration-200 group-hover:w-full"}`}>&nbsp;</span>
-                    </div>
-
-                    <div className="group relative ml-6 lg:m-0 lg:mt-6 lg:ml-0">
-                        {
-                            menuFlag ? <Link to="/about" onClick={switchMenuButton}>Videos</Link> : <Link to="/about">Videos</Link>
-                        }
-                        <span className={`absolute left-0 top-[100%] bg-red-dark dark:bg-red h-[2px]  ${location.pathname === "/about" ?"w-full":"ease w-0 rounded-md transition-all duration-200 group-hover:w-full"}`}>&nbsp;</span>
-                    </div>
-
-                    <div className="group relative ml-6 lg:m-0 lg:mt-6 lg:ml-0">
-                        {
-                            menuFlag ? <Link to="/resources" onClick={switchMenuButton}>Resources</Link> : <Link to="/resources">Resources</Link>
-                        }
-                        <span className={`absolute left-0 top-[100%] bg-green-dark dark:bg-green h-[2px]  ${location.pathname === "/resources" ?"w-full":"ease w-0 rounded-md transition-all duration-200 group-hover:w-full"}`}>&nbsp;</span>
-                    </div>
-
-                    <div className="group relative mx-6 lg:m-0 lg:mx-0 lg:mt-6">
-                        {
-                            menuFlag ? <Link to="https://www.huangrx.cn" onClick={switchMenuButton}>About</Link> : <Link to="https://www.huangrx.cn">About</Link>
-                        }
-                        <span className={`absolute left-0 top-[100%] bg-dark dark:bg-light h-[2px]  ${location.pathname === "/resources" ?"w-full":"ease w-0 rounded-md transition-all duration-200 group-hover:w-full"}`}>&nbsp;</span>
-                    </div>
-
-                    <a href="mailto:codebucks27@gmail.com" target="_blank" rel="noreferrer"
-                       className=" hover:border-1 relative mr-6 w-max rounded border border-solid border-dark bg-dark p-2 px-4 text-light hover:bg-light hover:text-dark
-                       dark:border-light dark:bg-light dark:text-dark dark:hover:bg-dark  dark:hover:text-light lg:mt-6 lg:mr-0 lg:bg-light lg:text-dark  dark:lg:bg-dark dark:lg:text-light ">
-                        <span className="absolute -right-1 -top-1 flex h-3 w-0.8rem">
-                            <span className="absolute inline-flex h-3 w-0.8rem animate-ping rounded-full bg-purple-dark opacity-75"></span>
-                            <span className="relative inline-flex h-3 w-0.8rem rounded-full bg-purple"></span>
-                        </span>
-                        <span>Hire Me</span>
-                    </a>
-
+        <>
+            <header
+                className="fixed flex flex-col items-center w-screen-vw bg-light-mode-one text-dark dark:bg-dark-mode dark:text-light z-50">
+                <div
+                    className={`w-full relative flex items-center justify-between py-4 px-16 lg:px-14 md:px-12 sm:px-4 z-52 `}>
+                    <Link to="/">
+                        <span className="font-lilita text-dark dark:text-light text-2r 2xl:text-1.4r md:text-1r">Huangrx</span>
+                    </Link>
                     {
-                        currentMode === "Dark" ?
-                            <button className="ease mr-6 flex items-center justify-center rounded p-1.5 lg:mr-0 lg:hidden bg-light  text-dark" onClick={() => switchThemeMode("Light")}>
-                                <BiSun />
-                            </button>
+                        !menuFlag ?
+                            <div className="flex items-center navbar-open-menu">
+                                <CgMenuMotion
+                                    className="ml-2r w-2r h-2r md:w-1r md:h-1r hover:cursor-pointer transform ease-in-out duration-300"
+                                    onClick={switchMenuButton}/>
+                            </div>
                             :
-                            <button className="ease mr-6 flex items-center justify-center rounded p-1.5 lg:mr-0 lg:hidden bg-dark  text-light" onClick={() => switchThemeMode("Dark")}>
-                                <BiMoon/>
-                            </button>
+                            <div className="flex items-center navbar-close-menu">
+                                <IoMdClose
+                                    className="ml-2r w-2r h-2r md:w-1r md:h-1r hover:cursor-pointer transform ease-in-out duration-300"
+                                    onClick={switchMenuButton}/>
+                            </div>
                     }
                 </div>
+                <span
+                    className={`${menuFlag ? 'opacity-100  delay-500' : 'opacity-0'} absolute left-0 top-full w-full rounded-md bg-dark dark:bg-light h-2p transform ease-in duration-300 z-52`}>&nbsp;</span>
+                <div
+                    className={`${menuFlag ? 'translate-y-0' : 'translate-y-full'} fixed top-0  w-screen-vw h-screen-vh flex flex-row z-51 transform ease-out duration-500 overflow-hidden`}>
+                    <nav
+                        className={`w-1/2 md:w-full flex flex-col justify-between bg-light dark:bg-dark text-dark dark:text-light py-10r md:py-6r px-16 lg:px-14 md:px-12 sm:px-4 font-bold font-kuaile bg-cover bg-center`}
+                        style={{backgroundImage: navPersonBg}}>
+                        <div className="w-full flex flex-row justify-between text-1.4r md:text-1r">
+                            <div className="w-1/2 flex flex-row">
+                                <div className="flex flex-col justify-start">
+                                    <div className="text-1r md:text-08r font-medium p-3">
+                                        <span>本站导航</span>
+                                    </div>
+                                    <Link
+                                        className="hover-brush-bg bg-full bg-center bg-no-repeat p-3"
+                                        to="/" onClick={switchMenuButton}>
+                                        <span>主页</span>
+                                    </Link>
+                                    <Link
+                                        className="hover-brush-bg bg-full bg-center bg-no-repeat p-3"
+                                        to="/blogs/category/all" onClick={switchMenuButton}>
+                                        <span>分类</span>
+                                    </Link>
+                                    <Link
+                                        className="hover-brush-bg bg-full bg-center bg-no-repeat p-3"
+                                        to="/daily" onClick={switchMenuButton}>
+                                        <span>日常点滴</span>
+                                    </Link>
+                                    <Link
+                                        className="hover-brush-bg bg-full bg-center bg-no-repeat p-3"
+                                        to="/about" onClick={switchMenuButton}>
+                                        <span>关于我</span>
+                                    </Link>
+                                </div>
+                                <div/>
+                            </div>
+                            <div className="w-1/2 flex flex-row">
+                                <div className="flex flex-col  ">
+                                    <div className="text-1r md:text-08r font-medium p-3">
+                                        <span>友情连接</span>
+                                    </div>
+                                    <a className="flex items-center gap-3 hover-brush-bg bg-full bg-center bg-no-repeat p-3"
+                                       href="https://github.com/hrenxiang">
+                                        <RiGithubFill/>
+                                        <span>GitHub</span>
+                                    </a>
+                                    <a
+                                        className="hover:cursor-pointer flex items-center gap-3  hover-brush-bg bg-full bg-center bg-no-repeat p-3"
+                                        href="weixin://dl/business/">
+                                        <RiWechatFill/>
+                                        <span>WeChat</span>
+                                    </a>
+                                    <a
+                                        className="hover:cursor-pointer flex items-center gap-3 hover-brush-bg bg-full bg-center bg-no-repeat p-3"
+                                        href="tencent://message/?uin=2295701930">
+                                        <BsTencentQq/>
+                                        <span>Q Q</span>
+                                    </a>
+                                </div>
+                                <div></div>
+                            </div>
+                        </div>
+                        <div className="h-full mt-8r 2xl:mt-4r md:mt-2r">
+                            <div className="flex flex-col text-1.4r md:text-1r">
+                                <div className="text-1r md:text-08r font-medium p-3">
+                                    <span>主题</span>
+                                </div>
 
-                <div className=" hidden items-center justify-center lg:flex">
-                    <button aria-label="Hamburger Menu" className="group relative rounded-lg border-2 border-solid border-dark dark:border-light  sm:rounded sm:border-0">
-                        {
-                            menuFlag ?
-                                <IoMdClose className="flex h-[24px] w-[24px] justify-between sm:h-[20px] sm:w-[20px] transform ease-in duration-300 navbar-close-menu" onClick={switchMenuButton}/>
-                                :
-                                <CgMenuMotion className="flex h-[24px] w-[24px] justify-center sm:h-[20px] sm:w-[20px]  transform ease-in duration-300 navbar-open-menu" onClick={switchMenuButton}/>
-                        }
-                    </button>
-                    {
-                        currentMode === "Dark" ?
-                            <button className="ease ml-6 flex items-center justify-center rounded p-1.5 bg-light  text-dark" onClick={() => switchThemeMode("Light")}>
-                                <BiSun/>
-                            </button>
-                            :
-                            <button className="ease ml-6 flex items-center justify-center rounded p-1.5 bg-dark  text-light" onClick={() => switchThemeMode("Dark")}>
-                                <BiMoon/>
-                            </button>
-                    }
+                                <div className="flex items-center">
+                                    <span
+                                        className="p-3 hover:cursor-pointer hover-brush-bg bg-full bg-center bg-no-repeat "
+                                        onClick={() => switchThemeMode(
+                                            "Light",
+                                            '#FEC6D0FF',
+                                            'url("https://huangrx.cn/img/nav-left-pink.png")',
+                                            'url("https://huangrx.cn/img/nav-brush-pink.png")'
+                                        )}
+                                    >
+                                        樱花
+                                    </span>
+                                    <span
+                                        className="p-3 hover:cursor-pointer hover-brush-bg bg-full bg-center bg-no-repeat "
+                                        onClick={() => switchThemeMode(
+                                            "Light",
+                                            '#C9B6E4FF',
+                                            'url("https://huangrx.cn/img/nav-left-purple.png")',
+                                            'url("https://huangrx.cn/img/nav-brush-purple.png")'
+                                        )}
+                                    >
+                                        薰衣草
+                                    </span>
+                                    <span
+                                        className="p-3 hover:cursor-pointer hover-brush-bg bg-full bg-center bg-no-repeat "
+                                        onClick={() => switchThemeMode(
+                                            "Dark",
+                                            '#4d6653',
+                                            'url("https://huangrx.cn/img/nav-left-green.png")',
+                                            'url("https://huangrx.cn/img/nav-brush-green.png")'
+                                        )}
+                                    >
+                                        黑鸢尾
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
 
-                    {
-                        menuFlag ? <SiteOverlay fc={switchMenuButton}/> : ""
-                    }
+                        <div className="h-full mt-8r 2xl:mt-4r md:mt-2r">
+                            <div className="flex flex-col text-1.4r md:text-1r">
+                                <div className="text-1r md:text-08r font-medium p-3">
+                                    <span>我的其他</span>
+                                </div>
+
+                                <div className="flex items-center">
+                                    <a
+                                        className="p-3 hover:cursor-pointer hover-brush-bg bg-full bg-center bg-no-repeat "
+                                        href="https://chat.huangrx.cn"
+                                    >
+                                        ChatAI
+                                    </a>
+
+                                    <a
+                                        className="p-3 hover:cursor-pointer hover-brush-bg bg-full bg-center bg-no-repeat "
+                                        href="https://www.huangrx.cn"
+                                    >
+                                        简历主页
+                                    </a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </nav>
+
+                    <div className={`relative w-1/2 md:hidden flex items-center justify-center`}
+                         style={{backgroundColor: currentColor}}>
+                        <div className=" w-1/5 ">
+                            <LazyImage url={'https://huangrx.cn/svg/couple-rabbit.svg'}
+                                       borderRadius="1rem"/>
+                        </div>
+
+                        <span
+                            className={`absolute left-0 top-0 w-2p h-full bg-light dark:bg-dark rounded-md blur blur-2p h-2p transform ease-in duration-500 z-52`}>&nbsp;</span>
+                    </div>
                 </div>
-            </nav>
-        </header>
+            </header>
+        </>
     );
 };
 

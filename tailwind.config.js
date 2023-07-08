@@ -1,3 +1,4 @@
+const React = require("react");
 const allColor = {
     // dark
     'dark': 'rgba(34, 34, 34)',
@@ -5,8 +6,6 @@ const allColor = {
     'dark-10': 'rgba(34, 34, 34, .10)',
     'dark-50': 'rgba(34, 34, 34, .55)',
     'dark-60': 'rgba(34, 34, 34, .60)',
-
-    // dark-mode
     'dark-mode': 'rgba(18, 18, 18)',
 
     // light
@@ -15,62 +14,79 @@ const allColor = {
     'light-10': 'rgba(248, 249, 250, .10)',
     'light-50': 'rgba(248, 249, 250, .55)',
     'light-60': 'rgba(248, 249, 250, .60)',
+    'light-mode-one': 'rgba(243, 243, 243)',
+    'light-mode-two': 'rgb(255,228,204)',
 
-    // light2
-    'light2': 'rgba(243, 243, 243)',
 
-    // green
-    'green': 'rgba(80, 255, 175)',
-    'green-25': 'rgba(80, 255, 175, .25)',
-    'green-50': 'rgba(80, 255, 175, .50)',
-    'green-dark': 'rgba(33, 150, 78)',
-    'green-dark-50': 'rgba(33, 150, 78, .50)',
-    'green-dark-75': 'rgba(33,150,78, .75)',
+    'green-one': 'rgb(241, 253, 243)',
+    'green-two': 'rgb(229, 244, 231)',
+    'green-three': 'rgb(209, 233, 210)',
+    'green-four': 'rgb(153, 205, 169)',
 
-    // purple
-    'purple': 'rgba(195, 165, 245)',
-    'purple-25': 'rgba(195, 165, 245, .25)',
-    'purple-50': 'rgba(195, 165, 245, .50)',
-    'purple-75': 'rgba(195, 165, 245, .75)',
-    'purple-dark': 'rgba(105, 45, 202)',
-    'purple-dark-50': 'rgba(105, 45, 202, .50)',
-    'purple-dark-75': 'rgba(105, 45, 202, .75)',
+    'pink-one': 'rgb(249, 245, 246)',
+    'pink-two': 'rgb(248, 232, 238)',
+    'pink-three': 'rgb(253, 206, 223)',
+    'pink-four': 'rgb(242, 190, 209)',
+    'pink-five': 'rgba(254,198,208)',
 
-    // red
-    'red': 'rgba(255, 169, 175)',
-    'red-15': 'rgba(255, 169, 175, .15)',
-    'red-25': 'rgba(255, 169, 175, .25)',
-    'red-50': 'rgba(255, 169, 175, .50)',
-    'red-dark': 'rgba(220, 39, 55)',
-    'red-dark-25': 'rgba(220, 39, 55, .25)',
-    'red-dark-50': 'rgba(220, 39, 55, .50)',
-    'red-dark-75': 'rgba(220, 39, 55, .75)',
+    'orange-one': 'rgb(255,225,189)',
+    'orange-two': 'rgb(255,204,154)',
+    'orange-three': 'rgb(255,185,123)',
+    'orange-four': 'rgb(255, 169, 82)',
+
+    'purple-one': 'rgb(241, 241, 246)',
+    'purple-two': 'rgb(225, 204, 236)',
+    'purple-three': 'rgb(201, 182, 228)',
+    'purple-four': 'rgb(190, 159, 225)',
+
+
+    'beige-two': 'rgba(196,223,223)',
+
+
 }
 
 const allDropShadow = {
-    "purple": "0 8px 0 #C3A5F5FF",
-    "purple-dark": "0 8px 0 #692DCAFF",
-    "purple-sm": "0 4px 0 #C3A5F5FF",
-    "purple-dark-sm": "0 4px 0 #692DCAFF",
-    "purple-xsm": "0 2px 0 #C3A5F5FF",
-    "purple-dark-xsm": "0 2px 0 #692DCAFF",
+    "dark": "0 2px 0 rgba(34, 34, 34)",
 }
 
 const allSize = {
-    "1px": '1px',
-    "2px": '2px',
-    "4px": '4px',
-    "6px": '6px',
-    "8px": '8px',
-    "10px": '10px',
+    "0": '0',
 
-    "0.6rem": "0.6rem",
-    "0.8rem": '0.8rem',
-    "1rem": '1rem',
-    "2rem": '2rem',
-    "5rem": '5rem',
-    "10rem": '10rem',
-    "12rem": '12rem',
+    "2p": '2px',
+    "4p": '4px',
+    "5p": '5px',
+    "6p": '6px',
+    "8p": '8px',
+    "10p": '10px',
+    "12p": '12px',
+
+    "06r": "0.6rem",
+    "08r": '0.8rem',
+    "1.4r": '1.4rem',
+    "1.6r": '1.6rem',
+    "1r": '1rem',
+    "2r": '2rem',
+    "4r": '4rem',
+    "6r": '6rem',
+    "8r": '8rem',
+    "10r": '10rem',
+    "12r": '12rem',
+    "14r": '14rem',
+    "16r": '16rem',
+
+    "1/10": "10%",
+    "1/5": "20%",
+    "3/10": "30%",
+    "2/5": "40%",
+    "1/2": "50%",
+    "3/5": "60%",
+    "7/10": "70%",
+    "4/5": "80%",
+    "9/10": "90%",
+    "full": "100%",
+
+    "screen-vh": "100vh",
+    "screen-vw": "100vw"
 };
 
 module.exports = {
@@ -118,34 +134,12 @@ module.exports = {
             // => @media (max-width: 639px) { ... }
         },
         fontFamily: {
-            display: ['Open Sans', 'sans-serif'],
-            body: ['Open Sans', 'sans-serif'],
+            lilita: ['Lilita One', 'cursive'],
+            kuaile: ['ZCOOL KuaiLe', 'sans-serif'],
+            sans: ['sans-serif']
         },
-        width: {
-            "1/10": "10%",
-            "1/5": "20%",
-            "3/10": "30%",
-            "2/5": "40%",
-            "1/2": "50%",
-            "3/5": "60%",
-            "7/10": "70%",
-            "4/5": "80%",
-            "9/10": "90%",
-            "full": "100%",
-
-            "0": '0',
-            "0.6rem": "0.6rem",
-            "0.8rem": '0.8rem',
-            "1rem": '1rem',
-            "1.5rem": '1.5rem',
-            "2rem": '2rem',
-            "4rem": '4rem',
-            "5rem": '5rem',
-            "6rem": '6rem',
-            "8rem": '8rem',
-            "10rem": '10rem',
-            "12rem": '12rem',
-        },
+        width: allSize,
+        height: allSize,
         extend: {
             blur: allSize,
             fontSize: allSize,
@@ -153,7 +147,6 @@ module.exports = {
             stroke: allColor,
             padding: allSize,
             margin: allSize,
-            top: allSize,
             right: allSize,
             borderRadius: allSize,
             lineHeight: allSize,
@@ -163,6 +156,29 @@ module.exports = {
             dropShadow: allDropShadow,
             fill: allColor,
             textDecorationColor: allColor,
+            translate: allSize,
+            zIndex: {
+                51: '51',
+                52: '52',
+                53: '53',
+                54: '54',
+            },
+            transitionTimingFunction: {
+                'custom-one': 'cubic-bezier(0.8, 0.15, 0.26, 0.91)'
+            },
+            backgroundSize: allSize,
+            backgroundImage: {
+                'about-paper': 'url("https://huangrx.cn/img/about-paper.png")',
+            },
+            keyframes: {
+                moveLeft: {
+                    '0%': { left: '100%' },
+                    '100%': { left: '-50%' },
+                },
+            },
+            animation: {
+                moveLeft: 'moveLeft 15s linear infinite',
+            }
         },
     },
     plugins: [],

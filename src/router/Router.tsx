@@ -1,7 +1,9 @@
 import React, {ReactElement} from 'react';
 import Home from "../page/Home";
-import BlogArticle from "../page/Article/BlogArticle";
 import BlogArticleCategory from "../page/ArticleCategory/BlogArticleCategory";
+import BlogArticle from "../page/Article/BlogArticle";
+import Daily from "../page/Daily";
+import About from "../page/About";
 
 interface Route {
     path: string;
@@ -29,6 +31,14 @@ const routers: Route[] = [
     {
         path: '/blogs/category/:category',
         element: loadingComponent(<BlogArticleCategory/>)
+    },
+    {
+        path: '/daily',
+        element: loadingComponent(<Daily/>)
+    },
+    {
+        path: '/about',
+        element: loadingComponent(<About/>)
     }
 ]
 
