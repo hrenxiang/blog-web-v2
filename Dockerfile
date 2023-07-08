@@ -28,4 +28,4 @@ EXPOSE 3002
 
 # 运行服务
 #CMD [ "npm", "start" ]
-CMD ["serve", "-s", "build"]
+CMD ["serve", "-s", "build", "-l", "3002"]
