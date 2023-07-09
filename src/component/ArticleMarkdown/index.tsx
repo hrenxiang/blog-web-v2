@@ -7,6 +7,7 @@ import ArticleSyntaxHighlighter from "./ArticleSyntaxHighlighter";
 import ArticleToc from "../ArticleToc";
 import {useStateContext} from "../../contexts/ContextProvider";
 import ArticleComment from "../ArticleComment";
+import LoadingAnimation from "../Animations/LoadingAnimation";
 
 interface ArticleMarkdownProps {
     markdownWidth: string;
@@ -49,9 +50,12 @@ const ArticleMarkdown: React.FC<ArticleMarkdownProps> = ({
 
     const [articleWordCount, setArticleWordCount] = useState<number>(0);
 
+    const [loading, setLoading] = useState<boolean>(false);
+
     useEffect(() => {
         // 读取 Markdown 文件内容
         if (documentUrl) {
+            setLoading(true);
             fetch(documentUrl)
                 .then(response => response.text())
                 .then(text => {
@@ -64,6 +68,7 @@ const ArticleMarkdown: React.FC<ArticleMarkdownProps> = ({
                     setArticleWordCount(text.replace(/[\W_]/g, '').length);
                 })
                 .catch(error => console.log(error));
+            setLoading(false)
         }
     }, [documentUrl]);
 
@@ -74,54 +79,62 @@ const ArticleMarkdown: React.FC<ArticleMarkdownProps> = ({
 
 
     return (
-        <div className={`relative flex w-full justify-center`}>
-            <div className={`text-dark dark:text-light bg-light dark:bg-dark-mode ${markdownWidth}`}>
-                <ReactMarkdown
-                    className="markdown-body text-dark dark:text-light !bg-light dark:!bg-dark-mode pb-10 text-1r md:!text-06r !leading-1.6r md:!leading-1.4r"
-                    remarkPlugins={[remarkGfm]}
-                    rehypePlugins={[rehypeRaw]}
-                    children={markdown}
-                    components={{
-                        code({node, inline, className, children, ...props}) {
-                            const match = /language-(\w+)/.exec(className || '');
-                            return inline ?
-                                (
-                                    <span
-                                        className="text-dark dark:text-light p-2p rounded-6p mx-2p"
-                                        style={{backgroundColor: currentColor}}
-                                    >
+        <>
+            {
+                loading ?
+                    <LoadingAnimation/>
+                    :
+                    <div className={`relative flex w-full justify-center`}>
+                        <div className={`text-dark dark:text-light bg-light dark:bg-dark-mode ${markdownWidth}`}>
+                            <ReactMarkdown
+                                className="markdown-body !font-pf text-dark dark:text-light !bg-light dark:!bg-dark-mode pb-10 !text-[14px] !leading-1.6r md:!leading-1.4r"
+                                remarkPlugins={[remarkGfm]}
+                                rehypePlugins={[rehypeRaw]}
+                                children={markdown}
+                                components={{
+                                    code({node, inline, className, children, ...props}) {
+                                        const match = /language-(\w+)/.exec(className || '');
+                                        return inline ?
+                                            (
+                                                <span
+                                                    className="text-dark dark:text-light p-2p rounded-6p mx-2p"
+                                                    style={{backgroundColor: currentColor}}
+                                                >
                                                             <code
                                                                 className={`${className} !bg-transparent !rounded-none `} {...props}>
                                                                 {children}
                                                             </code>
                                                         </span>
-                                )
-                                :
-                                (
-                                    match ?
-                                        (
-                                            <ArticleSyntaxHighlighter children={children}
-                                                                      language={match[1]}
-                                                                      {...props}
-                                            />
-                                        )
-                                        :
-                                        (
-                                            <ArticleSyntaxHighlighter children={children}
-                                                                      language="bash"
-                                                                      {...props}
-                                            />
-                                        )
-                                )
-                        },
-                    }}
-                />
+                                            )
+                                            :
+                                            (
+                                                match ?
+                                                    (
+                                                        <ArticleSyntaxHighlighter children={children}
+                                                                                  language={match[1]}
+                                                                                  {...props}
+                                                        />
+                                                    )
+                                                    :
+                                                    (
+                                                        <ArticleSyntaxHighlighter children={children}
+                                                                                  language="bash"
+                                                                                  {...props}
+                                                        />
+                                                    )
+                                            )
+                                    },
+                                }}
+                            />
 
-                {enableComment ? <ArticleComment/> : ''}
-            </div>
+                            {enableComment ? <ArticleComment/> : ''}
+                        </div>
 
-            {enableToc && tocMarkdown ? <ArticleToc tocMarkdown={tocMarkdown} width={tocWidth} cover={cover}/> : ''}
-        </div>
+                        {enableToc && tocMarkdown ?
+                            <ArticleToc tocMarkdown={tocMarkdown} width={tocWidth} cover={cover}/> : ''}
+                    </div>
+            }
+        </>
     );
 };
 

@@ -16,7 +16,7 @@ const ArticleToc: React.FC<ArticleTocProps> = ({tocMarkdown, width, cover}) => {
     return (
         <div className={`m-0 ml-auto relative ${width}`}>
             <div className="sticky top-[8rem] bg-transparent flex flex-col items-start">
-                <div className={`w-full bg-transparent text-left rounded-10p overflow-y-auto max-h-[60vh] py-2r border-2p border-solid text-1r text-06r`} style={{borderColor: currentColor}}>
+                <div className={`w-full bg-transparent text-left rounded-10p overflow-y-auto max-h-[60vh] 2xl:max-h-[50vh] py-2r border-2p border-solid text-1r`} style={{borderColor: currentColor}}>
                     <MarkdownNavbar
                         source={tocMarkdown}
                         headingTopOffset={0}
@@ -24,7 +24,7 @@ const ArticleToc: React.FC<ArticleTocProps> = ({tocMarkdown, width, cover}) => {
                     />
                 </div>
 
-                <div className="blog-cover w-full bg-transparent top-[calc(8rem + 60vh)] mt-2r ">
+                <div className="blog-cover w-full bg-transparent top-[calc(8rem + 60vh)] 2xl:top-[calc(8rem + 50vh)] mt-2r ">
                     <LazyImage url={cover} borderRadius="10px" />
                 </div>
             </div>

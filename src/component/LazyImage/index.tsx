@@ -9,18 +9,16 @@ interface LazyImageProps {
 const LazyImage: React.FC<LazyImageProps> = ({url, borderRadius}) => {
 
     return (
-        <div className="w-full">
-            <LazyLoadImage
-                className="h-full w-full"
-                src={url}
-                style={{
-                    objectFit: "cover",
-                    borderRadius: borderRadius ? borderRadius : "none"
-                }}
-                alt="Image"
-                effect="blur"
-            />
-        </div>
+        <LazyLoadImage
+            className="w-full"
+            src={url}
+            style={{
+                objectFit: "cover",
+                borderRadius: borderRadius ? borderRadius : "none"
+            }}
+            alt="Image"
+            effect="blur"
+        />
     );
 };
 

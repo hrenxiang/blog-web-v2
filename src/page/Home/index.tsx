@@ -48,7 +48,7 @@ const Home = () => {
                         <p className="md:px-2r">欢迎来到我的频道!</p>
                         <p className="md:px-2r">热衷于前后端开发.🍕</p>
 
-                        <a href="https://clevercodelab.com/contact/" className="py-2r md:py-1r px-4r md:px-2r" style={{
+                        <a href="https://profile.huangrx.cn/" className="py-2r md:py-1r px-4r md:px-2r" style={{
                             backgroundImage: navBrushBg,
                             backgroundPosition: "center",
                             backgroundSize: "100%",
@@ -61,8 +61,8 @@ const Home = () => {
                                src="https://huangrx.cn/video/home_video_2.mp4"></video>
                     </div>
 
-                    <div className="w-full flex justify-center flex-col mt-4r md:mt-2r text-2r 2xl:text-1.4r md:text-1r font-sans" ref={latelyDocumentRef}>
-                        <p className=" mx-auto mb-2r font-kuaile text-6r 2xl:text-4r md:text-1.6r">
+                    <div className="w-full flex justify-center flex-col mt-4r md:mt-2r text-2r 2xl:text-1.4r md:text-1r font-pf" ref={latelyDocumentRef}>
+                        <p className=" mx-auto font-kuaile text-6r 2xl:text-4r md:text-1.6r">
                             近期文章
                         </p>
                         <div>
@@ -73,40 +73,6 @@ const Home = () => {
                             }
                         </div>
                     </div>
-
-                    <div className="w-full mt-4r md:mt-2r">
-                        <p className="mb-2r">曾参与的项目</p>
-                        <div className="w-full flex flex-col items-center gap-8 relative">
-                            <div
-                                className="relative w-4/5 flex flex-col justify-center items-center site-home-participate text-light gap-4 py-2r"
-                                style={{aspectRatio: "3/2"}}>
-                                <div
-                                    className="w-full text-2r 2xl:text-1.4r md:text-1r flex items-center justify-center z-20 text-dark text-light">
-                                    <div>个人博客前后台</div>
-                                </div>
-                                <div
-                                    className="w-full text-2r 2xl:text-1.4r md:text-1r flex items-center justify-center z-20 text-dark text-light">
-                                    <div>美书写字</div>
-                                </div>
-                                <div
-                                    className="w-full text-2r 2xl:text-1.4r md:text-1r flex items-center justify-center z-20 text-dark text-light">
-                                    <div>线下收银</div>
-                                </div>
-                                <div
-                                    className="w-full text-2r 2xl:text-1.4r md:text-1r flex items-center justify-center z-20 text-dark text-light">
-                                    <div>线上商城</div>
-                                </div>
-                                <div
-                                    className="w-full text-2r 2xl:text-1.4r md:text-1r flex items-center justify-center z-20 text-dark text-light">
-                                    <div>智能管家</div>
-                                </div>
-                            </div>
-                            <div className="w-1/5 absolute bottom-0 right-0">
-                                <LazyImage url="https://huangrx.cn/img/home-kiss.png"/>
-                            </div>
-                        </div>
-                    </div>
-
 
                 </div>
             </div>

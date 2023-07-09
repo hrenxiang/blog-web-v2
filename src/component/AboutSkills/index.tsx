@@ -4,7 +4,7 @@ import Frontend from "./Frontend";
 
 const AboutSkills = () => {
     return (
-        <div className="flex flex-row md:flex-col gap-16 justify-center">
+        <div className="flex flex-row md:flex-col gap-16 justify-center w-full">
             <Frontend/>
             <Backend/>
         </div>

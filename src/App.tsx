@@ -38,7 +38,7 @@ const App: React.FC = () => {
             <div className={`${currentMode === "Dark" ? 'dark' : ''} `}>
                 <BrowserRouter>
                     <NavBar/>
-                    <div className="bg-light-mode-one dark:bg-dark-mode text-dark dark:text-light min-h-screen font-sans mb-[-1px]">
+                    <div className="bg-light-mode-one dark:bg-dark-mode text-dark dark:text-light min-h-screen font-pf mb-[-1px]">
                         <Routes>
                             {routers.map((route, index) => (
                                 <Route key={index} path={route.path} element={route.element} />

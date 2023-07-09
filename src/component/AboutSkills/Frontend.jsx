@@ -38,7 +38,7 @@ const Frontend = () => {
 
     return (
         <>
-            <div className="border-2p border-solid border-dark dark:border-light mr-auto md:mr-0 relative z-[2]">
+            <div className="border-[1px] border-solid border-dark dark:border-light relative z-[2]">
                 <div className="w-full grid grid-cols-2 gap-8 p-4r md:p-2r">
 
                     <div className="flex flex-col gap-4 justify-center">

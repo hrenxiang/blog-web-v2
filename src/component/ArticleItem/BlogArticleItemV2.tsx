@@ -36,14 +36,14 @@ const BlogArticleItemV2: React.FC<BlogArticleItemProps> = ({record}) => {
                 </div>
                 <Link to={`/blogs/article/${record.id}`} onClick={() => handlerAddView(record.id)}>
                     <h2
-                        className="mt-2 cursor-pointer  font-os text-xl font-bold   decoration-purple-dark decoration-solid  decoration-2 underline-offset-2 hover:underline dark:text-light dark:decoration-purple xslg:text-lg text-ellipsis line-clamp-1"
+                        className="mt-2 cursor-pointer  font-pf font-bold decoration-solid  decoration-2 underline-offset-2 hover:underline dark:text-light text-lg 2xl:text-1r text-ellipsis line-clamp-1"
                         style={{textDecorationColor: currentColor}}
                     >
                         {record.title}
                     </h2>
                 </Link>
-                <p className="mt-2 w-full font-os text-sm font-normal leading-normal text-dark dark:text-light xslg:text-xs md:text-sm text-ellipsis line-clamp-1">{record.description}</p>
-                <div className="flex justify-between items-center">
+                <p className="mt-2 w-full font-pf font-normal leading-normal text-dark dark:text-light text-08r text-ellipsis line-clamp-1">{record.description}</p>
+                <div className="flex justify-between items-center text-06r">
                     <div className="mt-4 flex items-center dark:text-light">
                         <span className="mr-2">By</span>
                         <a href="https://www.huangrx.cn" rel="noreferrer nofollow" target="_blank"

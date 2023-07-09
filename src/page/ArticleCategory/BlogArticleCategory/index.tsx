@@ -5,10 +5,13 @@ import {SubcategoryVO} from "../../../api/path/subcategory";
 import {Link, useLocation} from "react-router-dom";
 import {BlogArticleItemV2} from "../../../component/ArticleItem";
 import {Pagination} from "antd";
+import LoadingAnimation from "../../../component/Animations/LoadingAnimation";
 
 const BlogArticleCategory = () => {
 
     const [allSubcategory, setAllSubcategory] = useState<SubcategoryVO[]>([]);
+
+    const [loading, setLoading] = useState<boolean>(false);
 
     useEffect(() => {
         api.acquireAllSubcategory().then((res) => {
@@ -31,6 +34,8 @@ const BlogArticleCategory = () => {
     const [currentCategoryName, setCurrentCategoryName] = useState<string>('All');
 
     useEffect(() => {
+        setLoading(true);
+
         const documentPageVO: DocumentRequestVO = {
             page_num: state.pageNum,
             page_size: state.pageSize,
@@ -41,6 +46,7 @@ const BlogArticleCategory = () => {
             if (res[0]?.code === 0 || res[0]?.code === 200) {
                 setAllDocument(res[0]?.data)
             }
+            setLoading(false);
         });
     }, [currentCategory, state.pageNum, state.pageSize]);
 
@@ -99,14 +105,21 @@ const BlogArticleCategory = () => {
                         ))
                     }
                 </header>
-                <article
-                    className="mt-8 grid w-full grid-cols-3 gap-16 xl:gap-12 sxl:gap-8  lg:grid-cols-2  md:grid-cols-1">
-                    {
-                        allDocument?.records?.map((record) => (
-                            <BlogArticleItemV2 record={record} key={record.id}/>
-                        ))
-                    }
-                </article>
+                {
+                    loading ?
+                        <div className="flex justify-center items-center mt-4r">
+                            <LoadingAnimation/>
+                        </div>
+                        :
+                        <article
+                            className="mt-8 grid w-full grid-cols-3 gap-16 xl:gap-12 sxl:gap-8  lg:grid-cols-2  md:grid-cols-1">
+                            {
+                                allDocument?.records?.map((record) => (
+                                    <BlogArticleItemV2 record={record} key={record.id}/>
+                                ))
+                            }
+                        </article>
+                }
                 <div className="w-full my-12 md:my-8">
                     <Pagination
                         onChange={handlePageChange}

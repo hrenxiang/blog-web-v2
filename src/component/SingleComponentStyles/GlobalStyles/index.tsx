@@ -22,6 +22,9 @@ const GlobalStyles: React.FC = () => {
 
             currentThemeMode === "Dark" ? setCurrentColor(whiteColor) : setCurrentColor(blackColor);
             currentThemeMode === "Dark" ? setCurrentColorReverse(blackColor) : setCurrentColorReverse(whiteColor);
+        } else {
+            currentMode === "Dark" ? setCurrentColor(whiteColor) : setCurrentColor(blackColor);
+            currentMode === "Dark" ? setCurrentColorReverse(blackColor) : setCurrentColorReverse(whiteColor);
         }
 
     }, [currentMode, setCurrentMode]);

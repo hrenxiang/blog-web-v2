@@ -16,7 +16,7 @@ const About = () => {
         >
             <div className="flex flex-col  py-8r md:py-4r relative">
 
-                <div className="font-sans text-08r mb-6r md:mb-4r">
+                <div className="font-pf text-08r mb-6r md:mb-4r">
                     <p className="">现在的清晨，你我站在同一个门口</p>
                 </div>
 
@@ -35,54 +35,81 @@ const About = () => {
                         <LazyImage url={'https://huangrx.cn/img/about-rose.jpg'}/>
 
                         <div
-                            className="w-8r absolute -bottom-[4rem] -left-[6rem] md:w-4r md:-bottom-[2rem] md:-left-[2rem]">
-                            <LazyImage url='https://huangrx.cn/svg/leaf.svg' />
+                            className="w-8r absolute -bottom-[4rem] -left-[6rem] 2xl:w-6r  2xl:-bottom-[3rem] 2xl:-left-[3rem] md:w-2r md:-bottom-[1rem] md:-left-[1rem]">
+                            <LazyImage url='https://huangrx.cn/svg/leaf.svg'/>
                         </div>
                     </div>
                 </div>
 
-                <div className="w-full mt-6r md:mt-4r bg-no-repeat bg-full bg-about-paper bg-center px-1/5 py-4r text-left font-sans text-1.6r md:text-06r dark:text-dark relative">
-                    <div ref={basicInfoRef}>
-                        <p>来自历史悠久的中国河南，</p>
-                        <p>是一名后端开发工程师，</p>
-                        <p>梦想来自实干，要继续加油啊！</p>
-                    </div>
-
-                    <div
-                        className="w-8r absolute -bottom-[2rem] -right-[2rem] xl:w-6r md:w-4r md:right-0">
-                        <LazyImage url='https://huangrx.cn/svg/leaf2.svg' />
-                    </div>
+                <div className=" mt-6r md:mt-4r w-full">
+                    <LazyImage url='https://huangrx.cn/svg/about-view.svg'/>
                 </div>
 
-                <div className="w-full mt-6r md:mt-4r flex justify-between items-center">
-                    <div className="w-2/5 md:w-3/5">
-                        <LazyImage url={'https://huangrx.cn/svg/bubble1.svg'}/>
-                    </div>
-
-                    <div className="w-2/5 text-center 2xl:text-4r lg:text-2r md:text-1r">
+                <div
+                    className="relative w-full mt-6r md:mt-4r relative text-4r 2xl:text-2r md:text-1r bg-cover bg-no-repeat bg-center p-4r md:p-2r leading-[8rem] 2xl:leading-[4rem] md:leading-[2rem] bg-about-dian-dark dark:bg-about-dian-light">
+                    <div>
+                        <p>来自历史悠久的中国河南，23岁</p>
+                        <p>目前是一名Java后端开发工程师</p>
                         <p>本科学历</p>
-                        <p>工作两年</p>
-                        <p>热爱且积极</p>
+                        <p>现已工作两年</p>
+                        <p>参与开发多个项目，包括商城、收银等</p>
+                        <p>对待编程，热爱且积极</p>
+                    </div>
+
+                    <div className="absolute top-[-2rem] left-[5%] rotate-[-24deg] w-6r 2xl:w-4r md:w-1.6r">
+                        <LazyImage url='https://huangrx.cn/svg/about-drink.svg'/>
+                    </div>
+                    <div className="absolute bottom-0 left-[5%] w-6r 2xl:w-4r md:w-1.6r">
+                        <LazyImage url='https://huangrx.cn/svg/about-slipper.svg'/>
+                    </div>
+                    <div className="absolute top-[-1rem] right-[5%] w-6r 2xl:w-4r md:w-1.6r">
+                        <LazyImage url='https://huangrx.cn/svg/about-swim-ring.svg'/>
+                    </div>
+                    <div className="absolute bottom-0 right-[5%] w-6r 2xl:w-4r md:w-1.6r">
+                        <LazyImage url='https://huangrx.cn/svg/about-bird.svg'/>
                     </div>
                 </div>
 
-                <div className="w-full mt-6r md:mt-4r bg-no-repeat bg-full bg-about-paper bg-center pl-3/5 md:pl-1/5 py-4r text-left font-sans text-1.6r md:text-06r dark:text-dark relative">
-                    <div ref={projectInfoRef} className="flex justify-end flex-col w-full">
-                        <div className="w-auto">
-                            <p>至今参与开发五个项目，</p>
-                            <p>涉及商线下收银、酒店服务以及教育平台。</p>
-                            <br/>
-                            <p>独自开发三个前端服务一个后端服务，</p>
-                            <p>是自己的站点前后台服务。</p>
+                <div className="w-full mt-6r md:mt-4r flex justify-center">
+                    <div
+                        className="relative w-3/5 xl:w-4/5 flex flex-col justify-center items-center site-home-participate text-light gap-4 py-2r"
+                        style={{aspectRatio: "3/2"}}>
+                        <div
+                            className="w-full text-2r 2xl:text-1.4r md:text-1r flex items-center justify-center z-20 text-dark text-light">
+                            <div>个人博客前后台</div>
+                        </div>
+                        <div
+                            className="w-full text-2r 2xl:text-1.4r md:text-1r flex items-center justify-center z-20 text-dark text-light">
+                            <div>美书写字</div>
+                        </div>
+                        <div
+                            className="w-full text-2r 2xl:text-1.4r md:text-1r flex items-center justify-center z-20 text-dark text-light">
+                            <div>线下收银</div>
+                        </div>
+                        <div
+                            className="w-full text-2r 2xl:text-1.4r md:text-1r flex items-center justify-center z-20 text-dark text-light">
+                            <div>线上商城</div>
+                        </div>
+                        <div
+                            className="w-full text-2r 2xl:text-1.4r md:text-1r flex items-center justify-center z-20 text-dark text-light">
+                            <div>智能管家</div>
+                        </div>
+                        <div className="w-1/5 absolute bottom-0 right-[-2rem]">
+                            <LazyImage url="https://huangrx.cn/img/home-kiss.png"/>
                         </div>
                     </div>
                 </div>
 
-                <div className="text-1.6r 2xl:text-1r md:text-06r font-sans w-full mt-6r md:mt-4r flex justify-center mb-4r">
-                    <div className="w-7/10 2xl:w-full">
-                        <AboutSkills/>
-                    </div>
+                <div className="text-1.4r 2xl:text-1r md:text-06r font-pf w-full mt-6r md:mt-4r flex mb-4r">
+                    <AboutSkills/>
                 </div>
+
+                {/*<div className="w-full mt-6r md:mt-4r bg-no-repeat bg-full bg-about-paper bg-center px-1/5  py-6r 2xl:py-4r md:py-[3rem] relative">*/}
+                {/*    /!*<div*!/*/}
+                {/*    /!*    className="w-8r absolute -bottom-[2rem] -right-[2rem] xl:w-6r md:w-4r md:right-0">*!/*/}
+                {/*    /!*    <LazyImage url='https://huangrx.cn/svg/leaf2.svg' />*!/*/}
+                {/*    /!*</div>*!/*/}
+                {/*</div>*/}
             </div>
 
         </div>

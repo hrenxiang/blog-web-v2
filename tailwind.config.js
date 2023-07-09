@@ -1,4 +1,3 @@
-const React = require("react");
 const allColor = {
     // dark
     'dark': 'rgba(34, 34, 34)',
@@ -39,10 +38,7 @@ const allColor = {
     'purple-three': 'rgb(201, 182, 228)',
     'purple-four': 'rgb(190, 159, 225)',
 
-
     'beige-two': 'rgba(196,223,223)',
-
-
 }
 
 const allDropShadow = {
@@ -136,7 +132,7 @@ module.exports = {
         fontFamily: {
             lilita: ['Lilita One', 'cursive'],
             kuaile: ['ZCOOL KuaiLe', 'sans-serif'],
-            sans: ['sans-serif']
+            pf: ['PingFang SC', 'sans-serif']
         },
         width: allSize,
         height: allSize,
@@ -169,6 +165,8 @@ module.exports = {
             backgroundSize: allSize,
             backgroundImage: {
                 'about-paper': 'url("https://huangrx.cn/img/about-paper.png")',
+                'about-dian-light': 'url("https://huangrx.cn/svg/about-dian-light.svg")',
+                'about-dian-dark': 'url("https://huangrx.cn/svg/about-dian.svg")',
             },
             keyframes: {
                 moveLeft: {

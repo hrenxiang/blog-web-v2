@@ -8,6 +8,13 @@ body{
   font-size: 0.8rem;
 }
 
+@font-face {
+  font-family: "PingFang SC";
+  font-weight: 400;
+  src: url("assets/font/PingFangSC.ttf");
+  font-display: swap;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

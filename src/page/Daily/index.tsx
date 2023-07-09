@@ -1,10 +1,11 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {Pagination} from "antd";
 import {DailyRecord, DailyRequestVO, DailyResponsePageData} from "../../api/path/daily";
 import {api} from "../../api";
 import LazyImage from "../../component/LazyImage";
 import {useStateContext} from "../../contexts/ContextProvider";
 import moment from "moment";
+import useIntersectionObserver from "../../component/Observer";
 
 const Daily = () => {
 
@@ -23,6 +24,9 @@ const Daily = () => {
                 setAllDaily(res[0]?.data)
             }
         })
+
+        // 滚动到顶部
+        window.scrollTo({top: 0, behavior: 'smooth'});
     }, [state])
 
     const handlePageChange = (currentPage: number, pageSize: number) => {
@@ -31,9 +35,6 @@ const Daily = () => {
             page_num: currentPage,
             page_size: pageSize
         }))
-
-        // 滚动到顶部
-        window.scrollTo({top: 0, behavior: 'smooth'});
     }
 
     const [scrollY, setScrollY] = useState(0);
@@ -62,11 +63,14 @@ const Daily = () => {
         };
     };
 
+    const headerImgRef = useRef<HTMLDivElement>(null);
+    useIntersectionObserver(headerImgRef, 'bounce-top', "div");
+
     return (
         <div className="w-full">
             <div className="py-8r md:py-4r px-16 md:px-12 sm:px-4 relative overflow-hidden relative z-[2]">
                 <div className="leading-3r text-dark dark:text-light mx-1/5 2xl:mx-6r xl:mx-4r lg:mx-2r md:mx-0">
-                    <div className="bounce-top mb-2r w-3/5 m-auto">
+                    <div className="mb-2r w-3/5 m-auto" ref={headerImgRef}>
                         <LazyImage url="https://huangrx.cn/svg/xxlove.svg"
                                    borderRadius="10px"/>
                     </div>
@@ -89,10 +93,10 @@ const Daily = () => {
                                                     :
                                                     ''
                                             }
-                                            <div className="flex flex-col w-full text-1r leading-tight gap-4 font-sans">
+                                            <div className="flex flex-col w-full text-1r leading-tight gap-4 font-pf">
                                                 <p className="flex align-bottom">{moment(event.create_time).format('YYYY-MM-DD')}</p>
-                                                <p className="font-semibold text-1.6r">{event.tittle}</p>
-                                                <p className="text-1r md:text-0.6r leading-6">{event.content}</p>
+                                                <p className="font-semibold text-xl 2xl:text-lg md:text-1r">{event.tittle}</p>
+                                                <p className="text-1r md:text-08r leading-6">{event.content}</p>
                                             </div>
                                         </div>
                                     ))
@@ -112,13 +116,17 @@ const Daily = () => {
                     />
                 </div>
 
-                <div className="absolute left-[2rem] top-[10vh] xl:top-[20vh] w-12r 2xl:w-6r xl:w-4r lg:w-2r md:w-0 p-2 rounded-10p -z-[1]"
-                     style={calculateOffset(0.2, "none", true, true, 9, 9)}>
+                <div className="absolute left-[1rem] top-[10vh] xl:top-[20vh] w-8r xl:w-6r lg:w-4r md:hidden p-2 rounded-10p -z-[1]"
+                     style={calculateOffset(0.2, "none", false, true, 0, 6)}>
                     <LazyImage url="https://huangrx.cn/svg/star.svg" />
                 </div>
 
-                <div className="absolute right-[2rem] top-[90vh] w-12r 2xl:w-6r xl:w-4r lg:w-2r md:w-0 p-2 rounded-10p"
-                     style={calculateOffset(0.6, currentColor, false, true, 0, 1)}>
+                {/*<div className="absolute right-[2rem] top-[90vh] w-12r 2xl:w-6r xl:w-4r lg:w-2r p-2 rounded-10p md:hidden"*/}
+                {/*     style={calculateOffset(0.2, currentColor, false, true, 0, -0.01)}>*/}
+                {/*    <LazyImage url="https://huangrx.cn/svg/you-and-me.svg" />*/}
+                {/*</div>*/}
+
+                <div className="fixed right-[1rem] top-[90vh] w-12r 2xl:w-8r xl:w-6r lg:w-4r p-2 rounded-10p md:hidden">
                     <LazyImage url="https://huangrx.cn/svg/you-and-me.svg" />
                 </div>
             </div>
