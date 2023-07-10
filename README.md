@@ -1,3 +1,36 @@
+# 个人网站前台服务
+这是一个基于 React、TypeScript、Tailwind CSS等技术构建的个人网站前台服务。
+
+详情可直接查看 [Huangrx's web sit](https://www.huangrx.cn)
+
+### 主页
+![](https://images.huangrx.cn/uploads/2023/07/10/site-web-home-1.png)
+![](https://images.huangrx.cn/uploads/2023/07/10/site-web-home-2.png)
+![](https://images.huangrx.cn/uploads/2023/07/10/site-web-home-4.png)
+
+### 文章及其分类
+![](https://images.huangrx.cn/uploads/2023/07/10/site-web-category.png)
+![](https://images.huangrx.cn/uploads/2023/07/10/site-web-article.png)
+
+### Loading
+![](https://images.huangrx.cn/uploads/2023/07/10/site-web-loading.png)
+
+### 日常
+![](https://images.huangrx.cn/uploads/2023/07/10/site-web-daily.png)
+
+### 关于我
+![](https://images.huangrx.cn/uploads/2023/07/10/site-web-about-1.png)
+![](https://images.huangrx.cn/uploads/2023/07/10/site-web-about-2.png)
+
+### Navbar及Footer
+![](https://images.huangrx.cn/uploads/2023/07/10/site-web-nav-1.png)
+![](https://images.huangrx.cn/uploads/2023/07/10/site-web-footer.png)
+
+### 多种主题
+![](https://images.huangrx.cn/uploads/2023/07/10/site-web-nav-2.png)
+![](https://images.huangrx.cn/uploads/2023/07/10/site-web-nav-3.png)
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

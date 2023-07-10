@@ -45,7 +45,7 @@ const ArticleSyntaxHighlighter: React.FC<ArticleSyntaxHighlighterProps> = ({chil
                         className='code !m-0 !leading-2rem !p-1r'
                     />
                     <div
-                        className={`copy-btn hidden absolute px-4p py-2p bg-light text-dark dark:hover:text-light cursor-pointer select-none transition-all duration-300 ease top-[8px] right-[10px] rounded-6p text-06r`}
+                        className={`copy-btn hidden absolute px-4p py-2p bg-light text-dark dark:hover:text-light cursor-pointer select-none transition-all duration-300 ease top-[8px] right-[10px] rounded-2p text-06r`}
                         style={{}}
                         onClick={handleCopy}>
                         复制

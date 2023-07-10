@@ -87,7 +87,7 @@ const ArticleMarkdown: React.FC<ArticleMarkdownProps> = ({
                     <div className={`relative flex w-full justify-center`}>
                         <div className={`text-dark dark:text-light bg-light dark:bg-dark-mode ${markdownWidth}`}>
                             <ReactMarkdown
-                                className="markdown-body !font-pf text-dark dark:text-light !bg-light dark:!bg-dark-mode pb-10 !text-[14px] !leading-1.6r md:!leading-1.4r"
+                                className="markdown-body !font-pf !text-dark dark:!text-light !bg-light dark:!bg-dark-mode pb-10 !text-[14px] !leading-1.6r md:!leading-1.4r"
                                 remarkPlugins={[remarkGfm]}
                                 rehypePlugins={[rehypeRaw]}
                                 children={markdown}
@@ -97,7 +97,7 @@ const ArticleMarkdown: React.FC<ArticleMarkdownProps> = ({
                                         return inline ?
                                             (
                                                 <span
-                                                    className="text-dark dark:text-light p-2p rounded-6p mx-2p"
+                                                    className="text-dark dark:text-light p-2p rounded-2p mx-2p"
                                                     style={{backgroundColor: currentColor}}
                                                 >
                                                             <code

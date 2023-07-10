@@ -318,8 +318,8 @@ const GlobalStyles: React.FC = () => {
                   }
 
                   .slide-in-bottom {
-                    -webkit-animation: slide-in-bottom 2s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-                    animation: slide-in-bottom 2s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+                    -webkit-animation: slide-in-bottom 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+                    animation: slide-in-bottom 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
                   }
 
                   @-webkit-keyframes slide-in-bottom {
