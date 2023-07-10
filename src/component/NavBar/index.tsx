@@ -49,33 +49,31 @@ const NavBar: React.FC = () => {
             <header
                 className="fixed flex flex-col items-center w-screen-vw bg-light-mode-one text-dark dark:bg-dark-mode dark:text-light z-50">
                 <div
-                    className={`w-full relative flex items-center justify-between py-4 px-16 lg:px-14 md:px-12 sm:px-4 z-52 `}>
+                    className={`w-full relative flex items-center justify-between h-[4rem] 2xl:h-[3.6rem] md:h-[3.2rem]  px-16 lg:px-14 md:px-12 sm:px-4 z-52 `}>
                     <Link to="/">
-                        <span className="font-lilita text-dark dark:text-light text-2r 2xl:text-1.4r md:text-1r">Huangrx</span>
+                        <span className="font-lilita text-dark dark:text-light text-2r 2xl:text-1.6r md:text-1.2r">Huangrx</span>
                     </Link>
                     {
                         !menuFlag ?
-                            <div className="flex items-center navbar-open-menu">
+                            <div className="flex items-center navbar-open-menu h-full">
                                 <CgMenuMotion
-                                    className="ml-2r w-2r h-2r md:w-1r md:h-1r hover:cursor-pointer transform ease-in-out duration-300"
+                                    className="ml-2r w-2r 2xl:w-1.6r md:w-1.2r h-full hover:cursor-pointer transform ease-in-out duration-300"
                                     onClick={switchMenuButton}/>
                             </div>
                             :
                             <div className="flex items-center navbar-close-menu">
                                 <IoMdClose
-                                    className="ml-2r w-2r h-2r md:w-1r md:h-1r hover:cursor-pointer transform ease-in-out duration-300"
+                                    className="ml-2r w-2r 2xl:w-1.6r md:w-1.2r h-full hover:cursor-pointer transform ease-in-out duration-300"
                                     onClick={switchMenuButton}/>
                             </div>
                     }
                 </div>
-                <span
-                    className={`${menuFlag ? 'opacity-100  delay-500' : 'opacity-0'} absolute left-0 top-full w-full rounded-md bg-dark dark:bg-light h-2p transform ease-in duration-300 z-52`}>&nbsp;</span>
-                <div
-                    className={`${menuFlag ? 'translate-y-0' : 'translate-y-full'} fixed top-0  w-screen-vw h-screen-vh flex flex-row z-51 transform ease-out duration-500 overflow-hidden`}>
+                <span className={`${menuFlag ? 'opacity-100  delay-500' : 'opacity-0'} absolute left-0 top-full w-full rounded-md bg-dark dark:bg-light h-2p transform ease-in duration-300 z-52`}>&nbsp;</span>
+                <div className={`${menuFlag ? 'translate-y-0' : 'translate-y-full'} fixed top-0  w-screen-vw h-screen-vh flex flex-row z-51 transform ease-out duration-500 overflow-hidden`}>
                     <nav
-                        className={`w-1/2 md:w-full flex flex-col justify-between bg-light dark:bg-dark text-dark dark:text-light py-10r md:py-6r px-16 lg:px-14 md:px-12 sm:px-4 font-bold font-kuaile bg-cover bg-center`}
+                        className={`w-1/2 md:w-full flex flex-col justify-start bg-light dark:bg-dark text-dark dark:text-light py-[4rem] 2xl:py-[3.6rem] md:py-[3.2rem] px-16 lg:px-14 md:px-12 sm:px-4 font-bold font-kuaile bg-cover bg-center`}
                         style={{backgroundImage: navPersonBg}}>
-                        <div className="w-full flex flex-row justify-between text-1.4r md:text-1r">
+                        <div className="w-full flex flex-row justify-between text-1.4r md:text-1r pt-4r 2xl:pt-2r">
                             <div className="w-1/2 flex flex-row">
                                 <div className="flex flex-col justify-start">
                                     <div className="text-1r md:text-08r font-medium p-3">
@@ -89,7 +87,7 @@ const NavBar: React.FC = () => {
                                     <Link
                                         className="hover-brush-bg bg-full bg-center bg-no-repeat p-3"
                                         to="/blogs/category/all" onClick={switchMenuButton}>
-                                        <span>分类</span>
+                                        <span>文章分类</span>
                                     </Link>
                                     <Link
                                         className="hover-brush-bg bg-full bg-center bg-no-repeat p-3"
@@ -130,7 +128,7 @@ const NavBar: React.FC = () => {
                                 <div></div>
                             </div>
                         </div>
-                        <div className="h-full mt-8r 2xl:mt-4r md:mt-2r">
+                        <div className="w-full mt-4r 2xl:mt-2r">
                             <div className="flex flex-col text-1.4r md:text-1r">
                                 <div className="text-1r md:text-08r font-medium p-3">
                                     <span>主题</span>
@@ -174,7 +172,7 @@ const NavBar: React.FC = () => {
                             </div>
                         </div>
 
-                        <div className="h-full mt-8r 2xl:mt-4r md:mt-2r">
+                        <div className="w-full mt-4r 2xl:mt-2r">
                             <div className="flex flex-col text-1.4r md:text-1r">
                                 <div className="text-1r md:text-08r font-medium p-3">
                                     <span>我的其他</span>
@@ -202,8 +200,8 @@ const NavBar: React.FC = () => {
 
                     <div className={`relative w-1/2 md:hidden flex items-center justify-center`}
                          style={{backgroundColor: currentColor}}>
-                        <div className=" w-1/5 ">
-                            <LazyImage url={'https://huangrx.cn/svg/couple-rabbit.svg'}
+                        <div className=" w-4/5 ">
+                            <LazyImage url={'https://huangrx.cn/img/nav-disc.png'}
                                        borderRadius="1rem"/>
                         </div>
 

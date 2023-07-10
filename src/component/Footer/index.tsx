@@ -103,7 +103,7 @@ const Footer = () => {
                                 </text>
                             </svg>
                         </a>
-                        <h3 className="text-2r md:text-1.4r font-lilita">Love and Being Loved.</h3>
+                        <h3 className="text-2r md:text-1r font-lilita">Love and Being Loved.</h3>
                     </div>
                     <div className="flex text-xl gap-8 my-4r md:my-2r text-1r md:text-06r">
                         <a href="https://github.com/hrenxiang" target="_blank " rel="noreferrer">

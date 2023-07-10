@@ -58,6 +58,7 @@ const allSize = {
 
     "06r": "0.6rem",
     "08r": '0.8rem',
+    "1.2r": '1.2rem',
     "1.4r": '1.4rem',
     "1.6r": '1.6rem',
     "1r": '1rem',
@@ -170,12 +171,17 @@ module.exports = {
             },
             keyframes: {
                 moveLeft: {
-                    '0%': { left: '100%' },
-                    '100%': { left: '-50%' },
+                    '0%': {left: '100%'},
+                    '100%': {left: '-50%'},
                 },
+                tipRight: {
+                    '0%': {transform: 'skew(20deg,0deg) translateX(-20%)'},
+                    '100%': {transform: 'skew(20deg,0deg) translateX(120%)'},
+                }
             },
             animation: {
                 moveLeft: 'moveLeft 15s linear infinite',
+                tipRight: 'tipRight 5s infinite'
             }
         },
     },

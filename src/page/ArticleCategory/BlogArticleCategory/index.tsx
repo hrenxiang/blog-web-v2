@@ -19,6 +19,9 @@ const BlogArticleCategory = () => {
                 setAllSubcategory(res[0]?.data)
             }
         });
+
+        // 滚动到顶部
+        window.scrollTo({top: 0, behavior: 'smooth'});
     }, []);
 
 
