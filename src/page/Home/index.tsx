@@ -76,7 +76,7 @@ const Home = () => {
                         <p className="md:px-2r">欢迎来到我的频道!</p>
                         <p className="md:px-2r">热衷于前后端开发.🍕</p>
 
-                        <a href="https://profile.huangrx.cn/" className="py-2r md:py-1r px-4r md:px-2r" style={{
+                        <a href="mailto:2295701930@qq.com" className="py-2r md:py-1r px-4r md:px-2r" style={{
                             backgroundImage: navBrushBg,
                             backgroundPosition: "center",
                             backgroundSize: "100%",

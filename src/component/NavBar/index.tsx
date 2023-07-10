@@ -188,7 +188,7 @@ const NavBar: React.FC = () => {
 
                                     <a
                                         className="p-3 hover:cursor-pointer hover-brush-bg bg-full bg-center bg-no-repeat "
-                                        href="https://www.huangrx.cn"
+                                        href="https://profile.huangrx.cn"
                                     >
                                         简历主页
                                     </a>
