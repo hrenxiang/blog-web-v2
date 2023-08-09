@@ -264,6 +264,10 @@ const GlobalStyles: React.FC = () => {
                   .ant-modal-content, .ant-modal-title {
                     color: ${currentColor} !important;
                   }
+                  
+                  .ant-divider-horizontal.ant-divider-with-text::before, .ant-divider-horizontal.ant-divider-with-text::after {
+                    border-block-start-color: ${currentColor} !important;
+                  }
 
                   .category-header::-webkit-scrollbar {
                     height: 5px;

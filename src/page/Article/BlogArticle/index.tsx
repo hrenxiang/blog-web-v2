@@ -67,7 +67,7 @@ const BlogArticle = () => {
 
     return (
         <div
-            className="py-8r md:py-6r px-16 md:px-12 sm:px-4 flex flex-col items-center justify-center text-1rem bg-light dark:bg-dark-mode">
+            className="py-8r md:py-6r px-16 md:px-12 sm:px-4 flex flex-col items-center justify-center text-1rem bg-light-mode-one dark:bg-dark-mode">
             <span>上传日期 {blogRecord.create_time}</span>
             <h1 className="my-2r md:my-1r text-center text-2r md:text-1r font-extrabold uppercase">
                 {blogRecord.title}

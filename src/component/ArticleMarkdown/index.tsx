@@ -87,7 +87,7 @@ const ArticleMarkdown: React.FC<ArticleMarkdownProps> = ({
                     <div className={`relative flex w-full justify-center`}>
                         <div className={`text-dark dark:text-light bg-light dark:bg-dark-mode ${markdownWidth}`}>
                             <ReactMarkdown
-                                className="markdown-body !font-pf !text-dark dark:!text-light !bg-light dark:!bg-dark-mode pb-10 !text-[14px] !leading-1.6r md:!leading-1.4r"
+                                className="markdown-body !font-pf !text-dark dark:!text-light !bg-light-mode-one dark:!bg-dark-mode pb-10 !text-[14px] !leading-1.6r md:!leading-1.4r"
                                 remarkPlugins={[remarkGfm]}
                                 rehypePlugins={[rehypeRaw]}
                                 children={markdown}

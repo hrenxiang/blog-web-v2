@@ -38,7 +38,7 @@ export interface DailyRequestVO {
 
 export const acquireDaily = (param: DailyRequestVO) => {
     return Post(
-        "/timeline/acquire",
+        "/timeline/acquire/pull",
         {
             "page_num": param.page_num,
             "page_size": param.page_size

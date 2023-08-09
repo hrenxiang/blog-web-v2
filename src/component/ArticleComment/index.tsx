@@ -22,7 +22,7 @@ const ArticleComment: React.FC = () => {
     }, [])
 
     return (
-        <div id="waline">
+        <div id="waline" className="!bg-light-mode-one dark:!bg-dark-mode">
 
         </div>
     );
